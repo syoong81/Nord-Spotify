@@ -19,6 +19,7 @@
         "watch": "npm run spicetify-set-theme && npm run spicetify-apply && concurrently \"npm run spicetify-watch\" \"npm run watch-ext\" \"npm run watch-theme\" \"npm run watch-colors\"",
         "build": "npm run spicetify-set-theme && npm run build-ext && npm run build-theme && npm run build-colors && npm run spicetify-apply",
         "build-local": "npm run build-ext:local && npm run build-theme:local && npm run build-colors:local",
+        "build-repo": "npm run build-local && copyfiles --flat dist/Nord/user.css dist/Nord/theme.js Nord",
         "watch-ext": "for /f usebackq %i in (`spicetify path -s folder`) do spicetify-creator --watch --out=%i",
         "build-ext": "for /f usebackq %i in (`spicetify path -s folder`) do spicetify-creator --out=%i",
         "build-ext:local": "spicetify-creator --out=dist/Nord --minify",
