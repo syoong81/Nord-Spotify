@@ -12,7 +12,6 @@ const RegularSnippets = (() => {
         "hidePlaylistImageEditButton",
         "hoverTime",
         "centeredLyrics",
-        "autoExpandLibX",
         "minimalistLibX",
     ]
 

@@ -10,7 +10,9 @@ body {
 
         // remove liked songs card in your library
         &hideLikedSongsCard {
-            .collection-collectionEntityHeroCard-likedSongs {
+            .collection-collectionEntityHeroCard-likedSongs,
+            // the hero card is gone; Liked Songs is now an ordinary row in Your Library
+            .main-yourLibraryX-listItem:has(img[src*="liked-songs"]) {
                 display: none;
             }
         }
@@ -59,14 +61,6 @@ body {
                 .lyrics-lyrics-contentContainer .lyrics-lyrics-contentWrapper {
                     margin: unset !important;
                 }
-            }
-        }
-
-        &autoExpandLibX {
-            .main-yourLibraryX-entryPoints:has(
-                    ~ .main-yourLibraryX-library .main-yourLibraryX-libraryContainer:not([class*="main-yourLibraryX-libraryIsCollapsed"])
-                ) {
-                display: none;
             }
         }
 

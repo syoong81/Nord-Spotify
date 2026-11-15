@@ -12,7 +12,6 @@
     "customFontURL": "https://fonts.googleapis.com/css2?family=Quicksand:wght@500&display=swap",
     "fontSizeBool": false,
     "fontSize": "100%",
-    "autoExpandLibX": true,
     "minimalistLibX": true,
 
     "showBanner": true,
