@@ -34,3 +34,12 @@
 
 @import "content-styling";
 @import "targeted-modals/targeted-modals";
+
+//////////////////////////////////////// Clickable popups ////////////////////////////////////////
+
+// Window drag regions on the page underneath (the top bar, Marketplace's tab bar) swallow mouse clicks
+// on whatever part of a popup lies over them, such as the close button. Popups must opt out.
+generic-modal .GenericModal__overlay,
+.ReactModalPortal .GenericModal__overlay {
+    -webkit-app-region: no-drag;
+}
