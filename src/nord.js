@@ -17,6 +17,7 @@ import Popup from "./ui/Popup/Popup"
 import SettingsMenu from "./ui/Settings/SettingsMenu"
 
 import Icons from "./icons/icons"
+import Backup from "./backup/backup"
 
 export default async function nord() {
     Shared.SpicetifyConfig.color_scheme = LocalStorage.config.colorScheme
@@ -44,6 +45,8 @@ export default async function nord() {
     })
 
     settingsButton.element.addEventListener("contextmenu", () => (LocalStorage.config.rightClickToReload ? Utils.utils.forceReload() : null))
+
+    Backup.showPendingNotification()
 
     Spicetify.Platform.History.listen(async (event) => {
         State.onPageChange(event)

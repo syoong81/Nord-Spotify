@@ -4,17 +4,35 @@ import Api from "../services/api"
 import Utils from "../utils/utils"
 
 const Backup = (() => {
+    const pendingNotificationKey = "nord:pendingNotification"
+
+    // A restore reloads the app half a second later, which used to wipe the success message before
+    // it could be read. Keep it across the reload and show it once Nord has started again.
+    function showPendingNotification() {
+        const message = LocalStorage.utils.get(pendingNotificationKey)
+        if (!message) return
+
+        localStorage.removeItem(pendingNotificationKey)
+        Api.send.notification(message, false, 4000)
+    }
+
     function importData(data, mode = undefined) {
         if (data.hideHomePageRecommendation !== undefined && mode === undefined) {
             LocalStorage.saveConfig(data)
 
-            Api.send.notification("Nord settings restored successfully")
-        } else if (data["a:5YDSZWizEYBsXgk6kwxvMn"] !== undefined || data["spotify:album:5YDSZWizEYBsXgk6kwxvMn"] !== undefined) {
+            LocalStorage.utils.set(pendingNotificationKey, "Nord settings restored successfully")
+        } else if (
+            // chosen explicitly from a full backup: any set of positions is valid, including an empty one
+            (mode === "banner" && data && typeof data === "object" && !Array.isArray(data)) ||
+            // a banner-only backup, recognised by the entry every default config ships with
+            data["a:5YDSZWizEYBsXgk6kwxvMn"] !== undefined ||
+            data["spotify:album:5YDSZWizEYBsXgk6kwxvMn"] !== undefined
+        ) {
             LocalStorage.saveConfig("bannerPosition", data)
 
-            Api.send.notification("Banner positions restored successfully")
+            LocalStorage.utils.set(pendingNotificationKey, "Banner positions restored successfully")
         } else {
-            Api.send.notification("Falied to Restore, backup data seems to be Corrupted!", true, 4000)
+            Api.send.notification("Failed to Restore, backup data seems to be Corrupted!", true, 4000)
             return
         }
 
@@ -70,6 +88,7 @@ const Backup = (() => {
     return {
         import: importSettings,
         export: exportSettings,
+        showPendingNotification: showPendingNotification,
         utils: {
             filePicker: filePicker,
         },
