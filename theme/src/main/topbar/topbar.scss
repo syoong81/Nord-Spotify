@@ -130,3 +130,11 @@ body.nord-page-lyrics-plus {
         }
     }
 }
+
+//////////////////////////////////////// Nord's top bar buttons ////////////////////////////////////////
+
+// The top bar is now a window drag region, which swallows mouse clicks on anything inside it that
+// is not marked no-drag. This holds the Immersive View button and the Nord Settings button.
+.tetrax-react-portal {
+    -webkit-app-region: no-drag;
+}
