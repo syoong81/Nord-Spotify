@@ -5,6 +5,7 @@ import Popup from "../../../../../Popup/Popup"
 import LocalStorage from "../../../../../../localStorage/localStorage"
 import dynamicallyGeneratedConditionalCss from "../../../../../../features/snippets/dynamicallyGeneratedSnippets/dynamicallyGeneratedConditionalCss/dynamicallyGeneratedConditionalCss"
 import HideWindowsControls from "../../../../../../features/hideWindowsControls/hideWindowsControls"
+import Utils from "../../../../../../utils/utils"
 
 export default function editWindowsControlsPopup() {
     const TextProps = [
@@ -87,5 +88,14 @@ export default function editWindowsControlsPopup() {
         },
         isLarge: true,
         hideOverlay: true,
+    })
+
+    // Typing a value previews it straight away. If the popup is closed without saving, go back to the
+    // saved values instead of leaving the unsaved preview applied until the next restart.
+    const popupSelector = `generic-modal .tetrax-settings-menu[aria-label="Edit Windows Controls"]`
+    Utils.dom.waitForElement(popupSelector).then(async () => {
+        await Utils.dom.waitForElementDeath(popupSelector)
+        LocalStorage.tempConfig.hideWindowsControlsValues = structuredClone(LocalStorage.config.hideWindowsControlsValues)
+        updateWindowsControls()
     })
 }
