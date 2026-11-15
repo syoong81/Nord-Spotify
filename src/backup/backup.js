@@ -65,16 +65,38 @@ const Backup = (() => {
         }
     }
 
-    function exportSettings(mode) {
-        switch (mode) {
-            case "all":
-                Api.clipboard.send(Utils.json.JSONToString(LocalStorage.config))
-                break
-            case "banners":
-                Api.clipboard.send(Utils.json.JSONToString(LocalStorage.config.bannerPosition))
-                break
+    async function exportSettings(mode, target = "clipboard") {
+        const isBanners = mode === "banners"
+        const data = Utils.json.JSONToString(isBanners ? LocalStorage.config.bannerPosition : LocalStorage.config)
+
+        if (target !== "file") {
+            Api.clipboard.send(data)
+            Api.send.notification("Export Data Copied to Clipboard")
+            return
         }
-        Api.send.notification("Export Data Copied to Clipboard")
+
+        try {
+            const fileName = await fileSaver(data, isBanners ? "nord-banner-positions-backup.json" : "nord-settings-backup.json")
+            Api.send.notification(`Backup saved to ${fileName}`)
+        } catch (err) {
+            // closing the save dialog without picking a file is not an error
+            if (err?.name === "AbortError") return
+
+            console.warn(`Nord:handled: Failed to save backup file > from: \`exportSettings()\` > error: ${err}`)
+            Api.send.notification("Failed to save the backup file", true, 4000)
+        }
+    }
+
+    async function fileSaver(text, suggestedName) {
+        const fileHandle = await window.showSaveFilePicker({
+            suggestedName: suggestedName,
+            types: [{ description: "Nord backup", accept: { "application/json": [".json"] } }],
+        })
+        const writable = await fileHandle.createWritable()
+        await writable.write(text)
+        await writable.close()
+
+        return fileHandle.name
     }
 
     async function filePicker() {
@@ -91,6 +113,7 @@ const Backup = (() => {
         showPendingNotification: showPendingNotification,
         utils: {
             filePicker: filePicker,
+            fileSaver: fileSaver,
         },
     }
 })()
