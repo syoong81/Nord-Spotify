@@ -1,3 +1,17 @@
+//////////////////////////////////////// Spotify design-system colors ////////////////////////////////////////
+
+// Spicetify recolors most of Spotify's color variables from color.ini, but leaves these at their stock
+// near-black values, which showed up as black buttons, inputs and panels
+.encore-dark-theme,
+.encore-dark-theme .encore-base-set {
+    --background-highlight: var(--spice-custom-main-soft-secondary);
+    --background-elevated-base: var(--spice-custom-main-soft-secondary);
+    --background-elevated-highlight: var(--spice-custom-main-secondary);
+    --background-elevated-press: var(--spice-custom-main-soft-secondary);
+    --essential-subdued: var(--spice-custom-subdued);
+    --decorative-subdued: var(--spice-custom-main-secondary);
+}
+
 //////////////////////////////////////// Scrollbar ////////////////////////////////////////
 
 // change scrollbar appearance
