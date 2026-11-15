@@ -3,25 +3,28 @@
 //////////////////////////////////////// Main ////////////////////////////////////////
 
 // all cards styling
-.main-card-card {
+[data-encore-id="card"] {
     background-color: var(--spice-custom-main-soft-secondary);
-    border-radius: 10px;
     padding: 0;
     height: 100%;
     overflow: hidden;
+    // cards sit edge to edge in a shelf now, so a transparent border stands in for the gap between them
+    border: 6px solid transparent;
+    background-clip: padding-box;
+    border-radius: 16px;
 }
-.main-card-card:hover,
-.main-card-card[data-context-menu-open="true"] {
+[data-encore-id="card"]:hover,
+[data-encore-id="card"][data-context-menu-open="true"] {
     background-color: var(--spice-custom-main-secondary);
 }
-.main-card-card .main-card-imageContainer {
+[data-encore-id="card"] .main-card-imageContainer {
     margin-bottom: -4px;
 }
-.main-card-card .main-card-imageContainer .main-cardImage-circular,
-.main-card-card .main-card-imageContainer img {
+[data-encore-id="card"] .main-card-imageContainer .main-cardImage-circular,
+[data-encore-id="card"] .main-card-imageContainer img {
     border-radius: 0;
 }
-.main-card-card .main-card-cardMetadata {
+[data-encore-id="card"] > div:has([data-encore-id="cardTitle"]) {
     padding: 16px;
 }
 
@@ -34,20 +37,20 @@
 //////////////////////////////////////// Placeholder ////////////////////////////////////////
 
 // if artist image doesnt exist in card
-.main-card-card .main-entityHeader-imagePlaceholder {
+[data-encore-id="card"] .main-entityHeader-imagePlaceholder {
     background-color: var(--spice-custom-main-soft-secondary);
     transition: background-color 0.3s ease;
 }
-.main-card-card:hover .main-entityHeader-imagePlaceholder {
+[data-encore-id="card"]:hover .main-entityHeader-imagePlaceholder {
     background-color: var(--spice-custom-main-secondary) !important;
     transition: background-color 0.3s ease;
 }
 
 // card image placeholder background eg: png snippet
-.main-card-card .main-cardImage-imageWrapper {
+[data-encore-id="card"] .main-cardImage-imageWrapper {
     transition: background-color 0.3s ease;
 }
-.main-card-card:hover .main-cardImage-imageWrapper {
+[data-encore-id="card"]:hover .main-cardImage-imageWrapper {
     background-color: var(--spice-custom-main-secondary) !important;
     transition: background-color 0.3s ease;
 }
@@ -60,16 +63,16 @@
 //////////////////////////////////////// Fix ////////////////////////////////////////
 
 // cards play buttons right and bottom side space
-.main-card-card .main-card-PlayButtonContainer {
+[data-encore-id="card"] .main-card-PlayButtonContainer {
     right: 16px !important;
     bottom: 16px !important;
 }
 
 // fix artist name in cards
-.main-cardSubHeader-root > a {
+[data-encore-id="cardSubtitle"] a {
     color: var(--spice-custom-subdued) !important;
 }
-.main-cardSubHeader-root :hover {
+[data-encore-id="cardSubtitle"] a:hover {
     color: var(--spice-custom-link-hover) !important;
 }
 
