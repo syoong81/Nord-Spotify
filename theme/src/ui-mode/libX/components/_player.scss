@@ -7,7 +7,7 @@
     }
 
     // progress bar ball (visible when hovered)
-    .progress-bar__slider {
+    [data-testid="progress-bar-handle"] {
         width: 12px !important;
         height: 12px !important;
         top: 3.5px;
@@ -37,16 +37,16 @@
         border-bottom-right-radius: 10px !important;
     }
     // progress bar time style
-    .playback-bar__progress-time-elapsed,
-    .main-playbackBarRemainingTime-container {
+    [data-testid="playback-position"],
+    [data-testid="playback-duration"] {
         position: absolute;
         bottom: 14px;
         right: 0px;
     }
-    .playback-bar__progress-time-elapsed {
+    [data-testid="playback-position"] {
         transform: translateX(calc(-100% - 20px));
     }
-    .playback-bar__progress-time-elapsed::after {
+    [data-testid="playback-position"]::after {
         position: absolute;
         left: calc(100% + 10px);
         font-weight: bold;

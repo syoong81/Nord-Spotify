@@ -33,8 +33,8 @@ body {
 
         // hover timestamp
         &hoverTime {
-            .playback-bar__progress-time-elapsed,
-            .main-playbackBarRemainingTime-container {
+            [data-testid="playback-position"],
+            [data-testid="playback-duration"] {
                 opacity: 0;
             }
         }

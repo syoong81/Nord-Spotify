@@ -1,23 +1,23 @@
 //////////////////////////////////////// Center Player ////////////////////////////////////////
 
 // player center buttons allign center
-.player-controls__buttons--new-icons {
+.player-controls__buttons {
     margin-top: 8px;
 }
 
 // change appearance of play button in player
-.main-playPauseButton-button {
+[data-testid="control-button-playpause"] {
     color: inherit;
     background-color: transparent;
 }
-.main-playPauseButton-button svg {
+[data-testid="control-button-playpause"] svg {
     height: 19px;
     width: 19px;
     transform: scale(1.5);
 }
 
 // if no player, pause button disabled background color made transparent
-.main-playPauseButton-button[disabled] {
+[data-testid="control-button-playpause"][disabled] {
     background-color: var(--spice-main);
 }
 
