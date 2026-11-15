@@ -2,7 +2,8 @@ body {
     &.nord- {
         // hide homepage recommendation
         &hideHomePageRecommendation {
-            section[data-testid="home-page"] .main-shelf-shelf:not([aria-label="Recently played"]) {
+            section[data-testid="home-page"] .main-shelf-shelf:not([aria-label="Recently played"]),
+            section[data-testid="home-page"] section[data-testid="component-shelf"]:not([aria-label="Recently played"]):not([aria-label="Recents"]) {
                 display: none !important;
             }
         }
@@ -19,7 +20,9 @@ body {
             .playlist-playlist-seeMore,
             .playlist-playlist-playlistInlineCurationSection,
             .playlist-playlist-searchResultListContainer,
-            .playlist-playlist-recommendedTrackList {
+            .playlist-playlist-recommendedTrackList,
+            .playlist-playlist-findMoreButton,
+            div:has(> [data-testid="recommended-track"]) {
                 display: none !important;
             }
         }
@@ -41,6 +44,10 @@ body {
 
         // center lyrics
         &centeredLyrics {
+            // the lyrics page only has generated class names now; its container carries these inline variables
+            [style*="--lyrics-color-active"] {
+                text-align: center;
+            }
             .lyrics-lyrics-container {
                 .lyrics-lyrics-contentContainer {
                     justify-content: center !important;
@@ -64,7 +71,8 @@ body {
         }
 
         &minimalistLibX {
-            .main-yourLibraryX-listRowSubtitle {
+            .main-yourLibraryX-listRowSubtitle,
+            .main-yourLibraryX-listItem [data-encore-id="listRowSubtitle"] {
                 display: none;
             }
         }
