@@ -40,6 +40,10 @@ body {
             .main-entityHeader-background {
                 height: calc(100vh - 128px) !important;
             }
+            .main-entityHeader-container {
+                height: 100cqh !important;
+                max-height: none !important;
+            }
         }
 
         &bigBannerLibXImmersiveView {
@@ -48,6 +52,10 @@ body {
             // Big artist 
             .main-entityHeader-background {
                 height: calc(100vh - 48.2px) !important;
+            }
+            .main-entityHeader-container {
+                height: 100cqh !important;
+                max-height: none !important;
             }
         }
 
@@ -93,6 +101,12 @@ body {
             // layer injected by Nord to hold the banner (replaces Spotify's removed .under-main-view)
             .Root__main-view {
                 position: relative;
+                // lets the full page banner size the page header to the main view (100cqh)
+                container-type: size;
+            }
+            // Spotify now draws its own header image and gradient here; hide them while Nord's banner is shown
+            &:not(:has(#main-banner[style*="display: none"])) .main-view-container > .before-scroll-node {
+                display: none;
             }
             .nord-banner-layer {
                 position: absolute;
