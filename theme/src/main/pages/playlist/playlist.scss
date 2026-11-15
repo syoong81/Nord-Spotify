@@ -30,8 +30,8 @@
 }
 
 // change background color of selected row
-.main-trackList-trackListRow.main-trackList-selected,
-.main-trackList-trackListRow.main-trackList-selected:hover {
+[role="row"][aria-selected="true"] > .main-trackList-trackListRow,
+[role="row"][aria-selected="true"] > .main-trackList-trackListRow:hover {
     background-color: rgba(var(--spice-rgb-custom-main-secondary), 0.6) !important;
 }
 .main-trackList-trackListRow:focus-within,
@@ -40,27 +40,27 @@
 }
 
 // When song is currently playing
-.main-trackList-active .main-trackList-rowSubTitle,
-.main-trackList-active .main-trackList-rowSubTitle a,
+.main-trackList-active .main-trackList-rowMainContentSubTitle,
+.main-trackList-active .main-trackList-rowMainContentSubTitle a,
 .main-trackList-active .main-trackList-rowMarker,
 .main-trackList-active .main-trackList-rowSectionVariable,
 .main-trackList-active .main-trackList-rowSectionVariable a,
 .main-trackList-active .main-trackList-rowSectionVariable span,
 .main-trackList-active .main-trackList-rowMarker,
-.main-trackList-active .main-trackList-rowDuration {
+.main-trackList-active .main-trackList-duration {
     color: var(--spice-custom-subdued) !important;
 }
 
 // artist name color change in all playlist
-.main-trackList-rowSubTitle a[href],
-.main-trackList-rowSubTitle,
+.main-trackList-rowMainContentSubTitle a[href],
+.main-trackList-rowMainContentSubTitle,
 .main-trackList-rowSectionVariable a[href],
 .main-trackList-rowSectionVariable .ebHsEf {
     color: var(--spice-custom-subdued) !important;
 }
 
 // playlist tracks artist hover
-.main-trackList-rowSubTitle.standalone-ellipsis-one-line :hover {
+.main-trackList-rowMainContentSubTitle.standalone-ellipsis-one-line :hover {
     color: var(--spice-custom-link-hover) !important;
 }
 
@@ -98,12 +98,12 @@
 // playlist tracks row rounded
 div.main-rootlist-wrapper > div:nth-child(2) > div :hover,
 div.main-rootlist-wrapper > div:nth-child(2) > div .main-trackList-active:hover,
-.main-trackList-trackListRow.main-trackList-trackListRowGrid.main-trackList-selected {
+[role="row"][aria-selected="true"] > .main-trackList-trackListRow {
     border-radius: 10px;
 }
 
 // current playing song color
-div.main-rootlist-wrapper > div:nth-child(2) > div .main-trackList-rowTitle.standalone-ellipsis-one-line {
+div.main-rootlist-wrapper > div:nth-child(2) > div .main-trackList-rowMainContentTitle.standalone-ellipsis-one-line {
     color: var(--spice-text);
 }
 
