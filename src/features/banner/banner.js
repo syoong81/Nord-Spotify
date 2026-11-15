@@ -18,7 +18,7 @@ const Banner = (() => {
 
     async function init() {
         const player = await Utils.dom.waitForElement(".Root__now-playing-bar", 1000)
-        const topBar = await Utils.dom.waitForElement(".Root__top-bar", 1000)
+        const topBar = await Utils.dom.waitForElement(".Root__top-bar, .Root__globalNav", 1000)
         const zoomOutKey = "`"
 
         const banner = await injectAndStyleBanners()

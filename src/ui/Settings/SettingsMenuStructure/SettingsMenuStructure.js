@@ -18,7 +18,6 @@ export default function getSettingsMenuStructure() {
         ["Heading", { name: "Settings" }],
         ["Dropdown", DropdownProps.selectColorScheme],
         ["Dropdown", DropdownProps.selectDynamicColorMode],
-        ["Dropdown", DropdownProps.uiMode],
         ["MultipleActionButton", MultipleActionButtonProps.hideWindowsControls],
         ["MultipleActionButton", MultipleActionButtonProps.customFont],
         ["ActionInput", ActionInputProps.fontSize],

@@ -1,4 +1,4 @@
-import React from "react"
+import React from "../../../shims/react"
 import Render from "../../Render/Render"
 
 export default function Text({ children: content = [["", {}]] } = {}) {

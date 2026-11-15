@@ -15,9 +15,7 @@ const conditionalSnippets = {
     hideRightSidebar: "hideRightSidebar",
     hidePlayer: "hidePlayer",
 
-    bigBannerOld: "bigBannerOld",
     bigBannerLibX: "bigBannerLibX",
-    bigBannerOldImmersiveView: "bigBannerOldImmersiveView",
     bigBannerLibXImmersiveView: "bigBannerLibXImmersiveView",
 
     lyricsPlusNoBg: "lyricsPlusNoBg",

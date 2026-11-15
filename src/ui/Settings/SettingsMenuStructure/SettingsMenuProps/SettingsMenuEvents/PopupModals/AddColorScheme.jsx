@@ -1,4 +1,4 @@
-import React from "react"
+import React from "../../../../../../shims/react"
 
 import Render from "../../../../../../components/Render/Render"
 import Shared from "../../../../../../shared/shared"

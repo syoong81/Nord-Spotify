@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState } from "../../../shims/react"
 
 // import LocalStorage from "../../../utils/localStorage/localStorage"
 import { Label, Tooltip } from "./MenuHelpers"

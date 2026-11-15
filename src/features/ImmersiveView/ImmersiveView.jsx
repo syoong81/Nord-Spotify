@@ -1,8 +1,8 @@
-import React, { useState } from "react"
-import ReactDOM from "react-dom"
+import React, { useState } from "../../shims/react"
 
 import Shared from "../../shared/shared"
 import ImmersiveViewUtils from "./ImmersiveViewUtils"
+import Utils from "../../utils/utils"
 
 import { Icon, Tooltip } from "../../components/MenuComponents/components/MenuHelpers"
 
@@ -32,5 +32,5 @@ export default async function ImmersiveView() {
         )
     }
 
-    ReactDOM.render(<ImmersiveViewButton />, await ImmersiveViewUtils.createReactPortal())
+    Utils.dom.renderReact(<ImmersiveViewButton />, await ImmersiveViewUtils.createReactPortal())
 }

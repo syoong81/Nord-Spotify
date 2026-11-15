@@ -1,4 +1,4 @@
-import React from "react"
+import React from "../../../shims/react"
 
 export function Divider() {
     return (

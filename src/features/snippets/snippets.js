@@ -1,15 +1,11 @@
 import RegularSnippets from "./externalCssSnippets/regularSnippets"
 import JsSnippets from "./jsSnippets/jsSnippets"
 import dynamicallyGeneratedCss from "./dynamicallyGeneratedSnippets/dynamicallyGeneratedCss/dynamicallyGeneratedCss"
-import { injectConditionedSnippetClass, injectSnippetClass, injectSnippetClassDynamicUI, removeSnippetClass } from "./snippetsUtils"
+import { injectConditionedSnippetClass, injectSnippetClass, removeSnippetClass } from "./snippetsUtils"
 
 const Snippet = (() => {
     function initSnippets() {
-        if (window.Nord.shared.isLibX) {
-            injectSnippetClass("libX")
-        } else {
-            injectSnippetClass("oldUI")
-        }
+        injectSnippetClass("libX")
 
         if (window.Nord.shared.extensionList.beautifulLyrics) {
             injectSnippetClass("beautifulLyrics")
@@ -31,7 +27,6 @@ const Snippet = (() => {
             injectClass: injectSnippetClass,
             removeClass: removeSnippetClass,
             injectConditionedClass: injectConditionedSnippetClass,
-            injectClassDynamicUI: injectSnippetClassDynamicUI,
         },
     }
 })()

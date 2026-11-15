@@ -5,9 +5,9 @@ import Snippet from "../snippets/snippets"
 const ImmersiveViewUtils = (() => {
     async function createReactPortal() {
         const portal = document.createElement("div")
-        portal.className = "tetrax-react-portal main-topBar-historyButtons"
+        portal.className = "tetrax-react-portal main-topBar-historyButtons main-globalNav-historyButtons"
 
-        const portalLocation = await Utils.dom.waitForElement(".main-noConnection")
+        const portalLocation = await Utils.dom.waitForElement(".main-noConnection, .main-globalNav-historyButtons")
 
         portalLocation.insertAdjacentElement("afterend", portal)
 
@@ -16,12 +16,12 @@ const ImmersiveViewUtils = (() => {
 
     function turnOnImmersiveView() {
         Snippet.utils.injectClass(conditionalSnippets.immersiveView)
-        Snippet.utils.injectClassDynamicUI(conditionalSnippets.bigBannerLibXImmersiveView, conditionalSnippets.bigBannerOldImmersiveView)
+        Snippet.utils.injectConditionedClass(conditionalSnippets.bigBannerLibXImmersiveView)
     }
 
     function turnOffImmersiveView() {
         Snippet.utils.removeClass(conditionalSnippets.immersiveView)
-        Snippet.utils.injectClassDynamicUI(conditionalSnippets.bigBannerLibXImmersiveView, conditionalSnippets.bigBannerOldImmersiveView, false)
+        Snippet.utils.injectConditionedClass(conditionalSnippets.bigBannerLibXImmersiveView, false)
     }
 
     return {

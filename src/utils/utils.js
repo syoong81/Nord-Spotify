@@ -68,6 +68,26 @@ const Utils = (() => {
         return platform.includes(os)
     }
 
+    // Spicetify.ReactDOM is not available yet when the bundle is first evaluated,
+    // so it has to be looked up at call time rather than imported from "react-dom"
+    function renderReact(element, container) {
+        const ReactDOM = Spicetify.ReactDOM
+        if (ReactDOM.createRoot) {
+            ReactDOM.createRoot(container).render(element)
+        } else {
+            ReactDOM.render(element, container)
+        }
+    }
+
+    // Spotify renamed `Player.data.track` to `Player.data.item`
+    function getTrack(data = Spicetify.Player.data) {
+        return data?.item ?? data?.track
+    }
+
+    function isLocalTrack(track) {
+        return track?.isLocal ?? track?.metadata?.is_local === "true"
+    }
+
     function injectCSS(cssStyle, id) {
         id = `nord-${id}`
         if (!document.body.classList.contains(id)) {
@@ -89,7 +109,12 @@ const Utils = (() => {
     }
 
     function forceReload() {
-        Spicetify.PopupModal.hide()
+        // hide() throws when no popup is open on current Spotify, which used to abort the reload
+        try {
+            Spicetify.PopupModal.hide()
+        } catch (err) {
+            // no popup to close
+        }
         location.reload()
     }
 
@@ -165,21 +190,18 @@ const Utils = (() => {
         LocalStorage.utils.set("lyrics-plus:visual:noise", "false")
     }
 
-    function combineMapKeys(map1, map2) {
-        const keys = new Set([...map1.keys(), ...map2.keys()])
-        return Array.from(keys)
-    }
-
     return {
         path: { pathToURI: pathToURI, pathToUID: pathToUID, uriToUID: uriToUID },
         dom: {
             waitForElement: waitForElement,
             waitForElementDeath: waitForElementDeath,
             injectCSS: injectCSS,
+            renderReact: renderReact,
             removeInjectedElement: removeInjectedElement,
             injectStyleSheet: injectStyleSheet, // not used
         },
         api: { checkOS: checkOS },
+        player: { getTrack: getTrack, isLocalTrack: isLocalTrack },
         utils: {
             forceReload: forceReload,
             capitalizeFirstLetter: capitalizeFirstLetter, // not used
@@ -187,7 +209,6 @@ const Utils = (() => {
             makeSmallUri: makeSmallUri,
             makeFullUri: makeFullUri, // not used
             unColorLyricsPlus: unColorLyricsPlus,
-            combineMapKeys: combineMapKeys,
         },
         json: { JSONToString: JSONToString, stringToJSON: stringToJSON },
     }

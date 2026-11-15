@@ -1,7 +1,6 @@
 {
     "colorScheme": "Nord",
     "dynamicColorMode": "atmos",
-    "uiMode": "oldui",
     "hideWindowsControls": true,
     "hideWindowsControlsValues": {
         "height": "31",
