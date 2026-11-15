@@ -1,10 +1,9 @@
-import { toggleQuickSearchKeyBind, toggleSearchPageKeyBind, toggleRedoKeyBind } from "./snippets"
+import { toggleQuickSearchKeyBind, toggleSearchPageKeyBind } from "./snippets"
 
 const JsSnippets = (() => {
     const snippets = {
         quickSearch: toggleQuickSearchKeyBind,
         search: toggleSearchPageKeyBind,
-        redo: toggleRedoKeyBind,
     }
 
     function runJsSnippetCode(callback = () => {}) {

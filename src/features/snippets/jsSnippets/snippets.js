@@ -1,24 +1,12 @@
 import LocalStorage from "../../../localStorage/localStorage"
-import Utils from "../../../utils/utils"
 import { changeKeyBind } from "./jsSnippetsUtils"
 
+// Ctrl + Space opens quick search (Spotify's Ctrl + K)
 export function toggleQuickSearchKeyBind() {
-    changeKeyBind({ ctrl: true, key: "space" }, { ctrl: true, key: "k" }, LocalStorage.config.quickSearch)
+    changeKeyBind("mod+space", "k", LocalStorage.config.quickSearch)
 }
 
+// Ctrl + / focuses search (Spotify's Ctrl + L)
 export function toggleSearchPageKeyBind() {
-    changeKeyBind({ ctrl: true, key: "/" }, { ctrl: true, key: "l" }, LocalStorage.config.search)
-}
-
-export async function toggleRedoKeyBind() {
-    const isWindows = await Utils.api.checkOS("Win")
-    if (isWindows) {
-        if (LocalStorage.config.redo) {
-            Spicetify.Mousetrap.bind("ctrl+shift+z", async () => {
-                await Spicetify.CosmosAsync.post("sp://desktop/v1/redo")
-            })
-        } else {
-            Spicetify.Mousetrap.unbind("ctrl+shift+z")
-        }
-    }
+    changeKeyBind("mod+/", "l", LocalStorage.config.search)
 }

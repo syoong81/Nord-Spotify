@@ -111,10 +111,5 @@ export default function getSettingsMenuActionButtonProps() {
             field: "search",
             onClickHandler: () => JsSnippets.snippets.search(),
         },
-        redo: {
-            name: "Redo ( Ctrl + Shift + z )",
-            field: "redo",
-            onClickHandler: () => JsSnippets.snippets.redo(),
-        },
     }
 }

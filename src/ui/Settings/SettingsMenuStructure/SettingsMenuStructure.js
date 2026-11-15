@@ -42,7 +42,6 @@ export default function getSettingsMenuStructure() {
         ["Heading", { name: "Keybinds" }],
         ["ActionButton", ActionButtonProps.quickSearch],
         ["ActionButton", ActionButtonProps.search],
-        ["ActionButton", ActionButtonProps.redo],
         ["Heading", { name: "Advanced Settings" }],
         ["ActionButton", ActionButtonProps.rightClickToReload],
         ["Space"],
