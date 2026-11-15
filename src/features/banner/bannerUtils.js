@@ -257,6 +257,6 @@ export function canBannerInteractWithPlayerBar() {
         document.querySelector(".main-nowPlayingBar-left button:hover") ||
         document.querySelector(".main-nowPlayingBar-right button:hover") ||
         document.querySelector(".main-nowPlayingBar-right svg:hover") ||
-        document.querySelector(".volume-bar:hover")
+        document.querySelector(".volume-bar:hover, [data-testid=\"volume-bar\"]:hover")
     )
 }
