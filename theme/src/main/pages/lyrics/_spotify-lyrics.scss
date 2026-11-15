@@ -19,10 +19,12 @@
 }
 
 // spotify lyrics background norded
-.lyrics-lyrics-container {
+// (the lyrics page only has generated class names now, so also match the inline color variables Spotify sets on it)
+.lyrics-lyrics-container,
+[style*="--lyrics-color-active"] {
     --lyrics-color-active: var(--spice-text) !important;
     --lyrics-color-inactive: rgba(var(--spice-rgb-text), 0.7) !important;
     --lyrics-color-passed: rgba(var(--spice-rgb-text), 0.7) !important;
-    --lyrics-color-background: none !important;
+    --lyrics-color-background: transparent !important;
     --lyrics-color-messaging: var(--spice-text) !important;
 }
