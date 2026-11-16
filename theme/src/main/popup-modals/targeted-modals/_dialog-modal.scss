@@ -1,13 +1,13 @@
 // add song again and delete popup
-.ReactModalPortal .GenericModal > div {
+generic-modal .GenericModal > div {
     background-color: var(--spice-main);
 }
-.ReactModalPortal .GenericModal > div div button:focus {
+generic-modal .GenericModal > div div button:focus {
     outline: none;
     outline-offset: 0px;
 }
-.ReactModalPortal .GenericModal > div > div > button,
-.ReactModalPortal .GenericModal > div > h2,
-.ReactModalPortal .GenericModal > div > p {
+generic-modal .GenericModal > div > div > button,
+generic-modal .GenericModal > div > h2,
+generic-modal .GenericModal > div > p {
     color: var(--spice-text);
 }

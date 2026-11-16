@@ -212,6 +212,7 @@ div.main-rootlist-wrapper > div:nth-child(2) > div .main-trackList-rowMainConten
 }
 
 // playlist page big name padding
+.main-entityHeader-title h1,
 .main-entityHeader-titleInner h1 {
     margin: 0 !important;
 }
@@ -227,7 +228,7 @@ div.main-rootlist-wrapper > div:nth-child(2) > div .main-trackList-rowMainConten
 }
 
 // search bar in playlist page (at end recommended songs)
-.playlist-inlineSearchBox-filterInputContainer > input {
+.x-filterBox-filterInputContainer > input {
     display: flex;
     background-color: rgba(var(--spice-rgb-custom-main-soft-secondary), 0.7) !important;
     flex-direction: column;
@@ -236,10 +237,11 @@ div.main-rootlist-wrapper > div:nth-child(2) > div .main-trackList-rowMainConten
     color: var(--spice-text) !important;
     height: 40px !important;
 }
-.playlist-inlineSearchBox-filterInputContainer > input::placeholder {
+.x-filterBox-filterInputContainer > input::placeholder {
     color: var(--spice-custom-subdued) !important;
 }
 // search bar - search icon in left
+.x-filterBox-searchIconContainer,
 .playlist-inlineSearchBox-searchIcon {
     color: var(--spice-custom-subdued) !important;
 }
@@ -275,10 +277,12 @@ div.main-rootlist-wrapper > div:nth-child(2) > div .main-trackList-rowMainConten
 }
 
 // collaborated playlist author names
+.main-entityHeader-creatorWrapper a,
 .main-entityHeader-creatorButton {
     font-weight: bold;
     color: var(--spice-text);
 }
+.main-entityHeader-creatorWrapper a:hover,
 .main-entityHeader-creatorButton:hover {
     color: var(--spice-custom-link-hover) !important;
 }
