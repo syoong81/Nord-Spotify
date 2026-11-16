@@ -49,6 +49,8 @@ State as of 2026-11-15, tested on Spotify 1.3.9.2055 with Spicetify 2.46.7 (Wind
 - Lyrics: non-active lines are blurred again. `src/features/lyricsBlur` learns the active line's generated
   class at runtime (the only opaque line) and injects the rule; unsynced lyrics are left sharp.
 - Hide Windows Controls on/off, colour scheme export/import via clipboard: tested, working.
+- Nord Dynamic: all four modes tested. "Dark Vibrant" currently gives the same colour as "Atmosphere" because
+  `Spicetify.colorExtractor` returns null on 1.3.9 and the mode falls back to Spotify's extracted colours (left as is).
 
 - Search category chips (also on What's New), context menu, playlist filter box, playlist header creator link,
   Quick Search box, confirm dialogs: selectors repointed to current hooks.
