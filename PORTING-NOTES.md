@@ -29,9 +29,13 @@ State as of 2026-11-15, tested on Spotify 1.3.9.2055 with Spicetify 2.46.7 (Wind
    New Releases, Sort by Play Count, Playlist Filter, Sleep Timer. None were installed, so none were checked.
 3. **What's New page** (`/content-feed`): the feed was empty on the test account, so its rows could not be
    inspected or restyled. The Listening activity (friends) panel is done.
-4. **Remaining dead selectors.** The last audit had ~470 of ~616 selectors matching nothing; many only apply
-   with a snippet on or a popup open, but the rest need porting. Lists are produced by
-   `dev/tools/audit.js` + `dev/tools/analyze.cjs` (local, git-ignored).
+4. **Remaining dead selectors.** Latest audit (`node dev/tools/audit.mjs` then `node dev/tools/analyze.cjs`,
+   both local and git-ignored): 178 of 652 selectors match. Visual sweep of home, playlist, album, artist, discography,
+   search, genre, podcast, lyrics, Quick Search, context menu and the friends panel found nothing else broken. Most of
+   the remaining dead selectors are for UI Spotify removed (old sidebar rootlist, cover-art expand buttons, settings
+   page equaliser), for add-ons that aren't installed (Marketplace, Lyrics Plus, etc.), or for snippet/popup states
+   the audit can't open (Keyboard Shortcuts modal, confirm dialogs). They are harmless but could be deleted once the
+   add-on integrations are checked.
 5. **Untested:** macOS and Linux, Premium accounts. `Change Page's Banner On Song Change` was only checked
    with a simulated song change, not real playback.
 6. **Build tooling:** CI still uses Node 16 and spicetify-creator 1.0.13; `npm run build-repo` must be run
@@ -46,6 +50,10 @@ State as of 2026-11-15, tested on Spotify 1.3.9.2055 with Spicetify 2.46.7 (Wind
   class at runtime (the only opaque line) and injects the rule; unsynced lyrics are left sharp.
 - Hide Windows Controls on/off, colour scheme export/import via clipboard: tested, working.
 
+- Search category chips (also on What's New), context menu, playlist filter box, playlist header creator link,
+  Quick Search box, confirm dialogs: selectors repointed to current hooks.
+- Full-banner headers: short titles no longer wrap mid-word; Spotify's doubled "•" separator is hidden.
+
 ## Things learned
 
 - Spotify's top bar and some page elements are window drag regions. Anything clickable placed over them
@@ -59,3 +67,7 @@ State as of 2026-11-15, tested on Spotify 1.3.9.2055 with Spicetify 2.46.7 (Wind
 - Chromium freezes CSS transitions and throttles timers while the Spotify window is hidden or covered
   (`document.visibilityState === "hidden"`). Computed colours then read as their pre-transition value, and
   scripted tests with waits can stall. Keep the window visible, or set `transition: none` before measuring.
+- Git Bash rewrites arguments that start with "/" into Windows paths, so `node goto.mjs /genre/...` navigates to
+  `/C:/Program Files/Git/genre/...`. Export `MSYS_NO_PATHCONV=1` before passing routes.
+- An occasional "Something went wrong" right after a reload comes from Spotify's home-chips module racing
+  Spicetify's wrapper (`Cannot read properties of undefined (reading 'call')`); a second reload clears it.
