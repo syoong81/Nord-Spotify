@@ -328,5 +328,13 @@ body:not(:has(#main-banner[style*="display: none;"])) {
     .main-entityHeader-headerText {
         position: absolute;
         bottom: 25px;
+        // absolute positioning shrinks the box to fit, which wrapped short titles mid-word ("Po / p")
+        width: max-content;
+        max-width: calc(100% - 2 * var(--content-spacing, 24px));
+
+        // titles break between words only; Spotify's break-word split short titles mid-word
+        h1 {
+            word-break: normal;
+        }
     }
 }
