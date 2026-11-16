@@ -108,6 +108,11 @@ body {
             &:not(:has(#main-banner[style*="display: none"])) .main-view-container > .before-scroll-node {
                 display: none;
             }
+            // playlists wrap their track list in a container Spotify paints solid, which hid the banner on
+            // scroll there but not on Liked Songs (which has no such container)
+            &:not(:has(#main-banner[style*="display: none"])) .playlist-playlist-playlistContent {
+                background-color: transparent;
+            }
             .nord-banner-layer {
                 position: absolute;
                 inset: 0;
