@@ -81,6 +81,8 @@
 }
 
 // player active button like shuffle, repeat, queue, lyrics
+// shuffle has no aria state, only Spotify's accent colour class
+.main-nowPlayingBar-center button.encore-internal-color-text-bright-accent,
 .main-nowPlayingBar-nowPlayingBar button.control-button--active,
 .main-nowPlayingBar-nowPlayingBar button[aria-checked="mixed"],
 .main-nowPlayingBar-nowPlayingBar button[data-active="true"],
@@ -95,6 +97,8 @@
 }
 
 // hide dots under active button
+.main-nowPlayingBar-center button.encore-internal-color-text-bright-accent::before,
+.main-nowPlayingBar-center button.encore-internal-color-text-bright-accent::after,
 .main-nowPlayingBar-nowPlayingBar button[aria-checked="true"]::before,
 .main-nowPlayingBar-nowPlayingBar button[aria-checked="mixed"]::before,
 .main-nowPlayingBar-nowPlayingBar button[data-active="true"]::after,
