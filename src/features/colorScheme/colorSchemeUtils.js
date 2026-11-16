@@ -35,7 +35,7 @@ export async function injectColorScheme(colorScheme = LocalStorage.config.colorS
     Shared.SpicetifyConfig.color_scheme = colorScheme
 
     if (colorScheme == "Dynamic") {
-        await DynamicColors.inject()
+        await DynamicColors.inject(true)
     } else {
         Utils.dom.injectCSS(createColorScheme(LocalStorage.config.colorSchemes[colorScheme]), colorScheme)
     }

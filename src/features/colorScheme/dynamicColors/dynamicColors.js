@@ -7,8 +7,9 @@ import Utils from "../../../utils/utils"
 import ColorScheme from "../colorScheme"
 
 const DynamicColors = (() => {
-    async function inject() {
-        if (Shared.SpicetifyConfig.color_scheme === "Dynamic" && State.app.shouldChangeProp) {
+    // force: recompute even though the page/song image is unchanged (the user just picked Dynamic or a new mode)
+    async function inject(force = false) {
+        if (Shared.SpicetifyConfig.color_scheme === "Dynamic" && State.app.image && (force || State.app.shouldChangeProp)) {
             let colorPalette = await createDynamicColors()
             State.app.dynamicColorPalette = colorPalette
             updateDynamicColors(colorPalette)
@@ -53,7 +54,13 @@ const DynamicColors = (() => {
                             let palette = singleColorToPalette(`rgb(${R},${G},${B})`)
                             resolve(palette)
                         }
+                        // an image that never loads would otherwise leave the colours unchanged forever
+                        image.onerror = () => resolve(null)
                     })
+                    if (!colorPalette) {
+                        mainColors = await fetchDynamicColor(formatedImage)
+                        colorPalette = singleColorToPalette(mainColors.dark)
+                    }
                     break
                 case "DARK_VIBRANT":
                 case "LIGHT_VIBRANT":

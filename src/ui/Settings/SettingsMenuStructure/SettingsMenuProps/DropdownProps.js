@@ -36,7 +36,7 @@ export default function getSettingsMenuDropdownProps() {
                 LIGHT_VIBRANT: "Light Vibrant",
             },
             onChangeHandler: async () => {
-                if (Shared.SpicetifyConfig.color_scheme === "Dynamic") await DynamicColors.inject()
+                if (Shared.SpicetifyConfig.color_scheme === "Dynamic") await DynamicColors.inject(true)
             },
         },
     }
