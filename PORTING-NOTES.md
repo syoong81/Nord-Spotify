@@ -27,17 +27,24 @@ State as of 2026-11-15, tested on Spotify 1.3.9.2055 with Spicetify 2.46.7 (Wind
    The README also still advertises Stock UI support.
 2. **Add-on integrations** (`theme/src/third-parties/`): Lyrics Plus, Beautiful Lyrics, Marketplace cards,
    New Releases, Sort by Play Count, Playlist Filter, Sleep Timer. None were installed, so none were checked.
-3. **What's New page** (`/content-feed`) and the **friend activity panel**: only base colours apply.
-   What's New has generated class names only.
+3. **What's New page** (`/content-feed`): the feed was empty on the test account, so its rows could not be
+   inspected or restyled. The Listening activity (friends) panel is done.
 4. **Remaining dead selectors.** The last audit had ~470 of ~616 selectors matching nothing; many only apply
    with a snippet on or a popup open, but the rest need porting. Lists are produced by
    `dev/tools/audit.js` + `dev/tools/analyze.cjs` (local, git-ignored).
-5. **Player bar details:** done (play button background, active dots). The like button keeps the scheme accent colour.
-6. **Lyrics page:** blur on non-active lines (no stable hook for individual lines).
-7. **Untested:** macOS and Linux, Premium accounts, "Hide Windows Controls" on/off now tested and working;
-   `Change Page's Banner On Song Change` switched off, colour scheme import/export via clipboard.
-8. **Build tooling:** CI still uses Node 16 and spicetify-creator 1.0.13; `npm run build-repo` must be run
+5. **Untested:** macOS and Linux, Premium accounts. `Change Page's Banner On Song Change` was only checked
+   with a simulated song change, not real playback.
+6. **Build tooling:** CI still uses Node 16 and spicetify-creator 1.0.13; `npm run build-repo` must be run
    before committing so `Nord/` holds the current build.
+
+## Done since the first pass
+
+- Progress bar sized and coloured through Spotify's own variables (`--progress-bar-height` etc.).
+- Player bar: bare play button, no dots under active buttons, shuffle coloured when on. The like button keeps
+  the scheme accent colour.
+- Lyrics: non-active lines are blurred again. `src/features/lyricsBlur` learns the active line's generated
+  class at runtime (the only opaque line) and injects the rule; unsynced lyrics are left sharp.
+- Hide Windows Controls on/off, colour scheme export/import via clipboard: tested, working.
 
 ## Things learned
 
@@ -49,3 +56,6 @@ State as of 2026-11-15, tested on Spotify 1.3.9.2055 with Spicetify 2.46.7 (Wind
 - Stable hooks that worked: `data-encore-id`, `data-testid`, `aria-selected`, and
   `[style*="--lyrics-color-active"]` for the lyrics page. Spicetify's `css-map.json` is out of date for 1.3.9.
 - Mousetrap only replaces a binding when the combo text matches exactly (`mod+/`, not `ctrl+/`).
+- Chromium freezes CSS transitions and throttles timers while the Spotify window is hidden or covered
+  (`document.visibilityState === "hidden"`). Computed colours then read as their pre-transition value, and
+  scripted tests with waits can stall. Keep the window visible, or set `transition: none` before measuring.
