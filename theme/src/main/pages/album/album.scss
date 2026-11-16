@@ -14,3 +14,8 @@
 .main-entityHeader-divider span {
     color: var(--spice-text);
 }
+
+// Spotify draws a "•" before dividers that already contain one, doubling the separator
+.main-entityHeader-divider[data-separator="true"]::before {
+    content: none;
+}
