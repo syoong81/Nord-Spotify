@@ -113,6 +113,7 @@ body {
             &:not(:has(#main-banner[style*="display: none"])) {
                 .playlist-playlist-playlistContent,
                 section[data-testid="playlist-page"] > .contentSpacing:has(.main-trackList-trackListContainer),
+                section[data-testid="playlist-page"] .contentSpacing:has(> .search-searchCategory-contentArea),
                 section[data-testid="album-page"] > .contentSpacing:has(.main-trackList-trackListContainer) {
                     background-color: var(--spice-main);
                 }

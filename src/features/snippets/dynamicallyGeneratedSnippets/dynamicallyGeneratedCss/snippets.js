@@ -20,6 +20,8 @@ export function fontSize(size = LocalStorage.config.fontSize) {
 export const trackListBgSelector = [
     ".playlist-playlist-playlistContent",
     "section[data-testid=\"playlist-page\"] > .contentSpacing:has(.main-trackList-trackListContainer)",
+    // Liked Songs genre filter chips, between the action bar and the track list
+    "section[data-testid=\"playlist-page\"] .contentSpacing:has(> .search-searchCategory-contentArea)",
     "section[data-testid=\"album-page\"] > .contentSpacing:has(.main-trackList-trackListContainer)",
 ].join(", ")
 
