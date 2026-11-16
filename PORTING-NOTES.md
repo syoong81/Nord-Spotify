@@ -32,9 +32,9 @@ State as of 2026-11-15, tested on Spotify 1.3.9.2055 with Spicetify 2.46.7 (Wind
 4. **Remaining dead selectors.** The last audit had ~470 of ~616 selectors matching nothing; many only apply
    with a snippet on or a popup open, but the rest need porting. Lists are produced by
    `dev/tools/audit.js` + `dev/tools/analyze.cjs` (local, git-ignored).
-5. **Player bar details:** like-button colour and the dots under active shuffle/repeat.
+5. **Player bar details:** done (play button background, active dots). The like button keeps the scheme accent colour.
 6. **Lyrics page:** blur on non-active lines (no stable hook for individual lines).
-7. **Untested:** macOS and Linux, Premium accounts, the "Hide Windows Controls" on/off toggle itself,
+7. **Untested:** macOS and Linux, Premium accounts, "Hide Windows Controls" on/off now tested and working;
    `Change Page's Banner On Song Change` switched off, colour scheme import/export via clipboard.
 8. **Build tooling:** CI still uses Node 16 and spicetify-creator 1.0.13; `npm run build-repo` must be run
    before committing so `Nord/` holds the current build.

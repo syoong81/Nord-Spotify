@@ -10,6 +10,11 @@
     color: inherit;
     background-color: transparent;
 }
+// the round background now sits on an inner span
+[data-testid="control-button-playpause"] > span {
+    color: inherit;
+    background-color: transparent !important;
+}
 [data-testid="control-button-playpause"] svg {
     height: 19px;
     width: 19px;
@@ -90,6 +95,9 @@
 }
 
 // hide dots under active button
+.main-nowPlayingBar-nowPlayingBar button[aria-checked="true"]::before,
+.main-nowPlayingBar-nowPlayingBar button[aria-checked="mixed"]::before,
+.main-nowPlayingBar-nowPlayingBar button[data-active="true"]::after,
 .main-shuffleButton-button.main-shuffleButton-active:after,
 .main-repeatButton-button.main-repeatButton-active:after,
 // queue 
