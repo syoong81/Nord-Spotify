@@ -31,6 +31,7 @@ export default function getSettingsMenuStructure() {
         ["ActionButton", ActionButtonProps.changeCoverArtOnSongChange],
         ["ActionButton", ActionButtonProps.hidePageDetails],
         ["ActionInput", ActionInputProps.bannerBlur],
+        ["ActionInput", ActionInputProps.bannerBehindTrackList],
         ["ActionButton", ActionButtonProps.fitBannerImage],
         ["Heading", { name: "Snippets" }],
         ["ActionButton", ActionButtonProps.hideHomePageRecommendation],

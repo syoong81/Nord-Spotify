@@ -108,10 +108,14 @@ body {
             &:not(:has(#main-banner[style*="display: none"])) .main-view-container > .before-scroll-node {
                 display: none;
             }
-            // playlists wrap their track list in a container Spotify paints solid, which hid the banner on
-            // scroll there but not on Liked Songs (which has no such container)
-            &:not(:has(#main-banner[style*="display: none"])) .playlist-playlist-playlistContent {
-                background-color: transparent;
+            // solid track list background over the banner; the "Show Banner Behind Track Lists" setting
+            // overrides it with a see-through one (bannerBehindTrackList() in dynamicallyGeneratedCss/snippets.js)
+            &:not(:has(#main-banner[style*="display: none"])) {
+                .playlist-playlist-playlistContent,
+                section[data-testid="playlist-page"] > .contentSpacing:has(.main-trackList-trackListContainer),
+                section[data-testid="album-page"] > .contentSpacing:has(.main-trackList-trackListContainer) {
+                    background-color: var(--spice-main);
+                }
             }
             .nord-banner-layer {
                 position: absolute;

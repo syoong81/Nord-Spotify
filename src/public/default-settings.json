@@ -23,6 +23,8 @@
     "bannerBlur": false,
     "bannerBlurValue": "10",
     "fitBannerImage": false,
+    "bannerBehindTrackList": true,
+    "trackListBgOpacity": "0",
 
     "hideHomePageRecommendation": false,
     "hoverTime": true,

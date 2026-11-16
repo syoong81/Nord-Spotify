@@ -15,3 +15,18 @@ export function fontSize(size = LocalStorage.config.fontSize) {
         font-size: ${size};
     }`
 }
+
+// track list backgrounds over the full page banner (the solid default lives in _conditional-snippets.scss)
+export const trackListBgSelector = [
+    ".playlist-playlist-playlistContent",
+    "section[data-testid=\"playlist-page\"] > .contentSpacing:has(.main-trackList-trackListContainer)",
+    "section[data-testid=\"album-page\"] > .contentSpacing:has(.main-trackList-trackListContainer)",
+].join(", ")
+
+export function bannerBehindTrackList(opacity = LocalStorage.config.trackListBgOpacity) {
+    const value = Math.min(100, Math.max(0, parseFloat(opacity) || 0)) / 100
+    return `
+    body.nord-bannerCSS:not(:has(#main-banner[style*="display: none"])) :is(${trackListBgSelector}) {
+        background-color: rgba(var(--spice-rgb-main), ${value}) !important;
+    }`
+}
