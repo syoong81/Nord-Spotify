@@ -1,22 +1,30 @@
 // //////////// quick search ////////////
+// Spotify 1.3.x only gives the modal generated class names; the input's data-testid is the stable hook,
+// so the box around it is reached with :has(). The old class selectors are kept for older clients.
+
+$qs-input: '[data-testid="search-modal-input"]';
 
 // quick search - text color
+#{$qs-input},
 .search-modal-input {
     color: var(--spice-text) !important;
 }
 
 // quick search - placeholder in search box
+#{$qs-input}::placeholder,
 .search-modal-input::placeholder {
     color: var(--spice-custom-subdued);
 }
 
 // quick search - input box
+div:has(> #{$qs-input}),
 .search-modal-inputContainer {
-    background: var(--spice-custom-main-soft-secondary);
+    background: var(--spice-custom-main-soft-secondary) !important;
     border-radius: 10px;
 }
 
 // quick search - search icon
+div:has(> #{$qs-input}) svg,
 .search-modal-searchIcon {
     color: var(--spice-text);
 }
@@ -40,6 +48,7 @@
 }
 
 // quick search popup rounded corner
+div:has(> div > #{$qs-input}),
 .search-modal-modalWrapper {
     border-radius: 10px;
 }
