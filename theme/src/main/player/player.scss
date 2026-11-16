@@ -23,18 +23,31 @@
 
 //////////////////////////////////////// Progress Bar ////////////////////////////////////////
 
+// size and colours go through Spotify's own variables, so every layer of the bar
+// (and extensions that read them) agree on the dimensions
+.progress-bar {
+    --progress-bar-height: 6px;
+    --progress-bar-radius: 50px;
+    // filled part, also while hovered
+    --fg-color: var(--spice-custom-selected-button) !important;
+    --is-active-fg-color: var(--spice-custom-selected-button) !important;
+    // remaining part
+    --bg-color: var(--spice-custom-main-secondary) !important;
+}
+
 // progress bar (how much filled)
 .x-progressBar-fillColor {
-    border-radius: 50px;
-    height: 6px;
-    background-color: var(--spice-custom-selected-button) !important;
     transition: transform, 0s, ease, 0.25s;
+}
+
+// keep the drag handle lighter than the filled part so it stays visible
+.progress-bar__slider {
+    background-color: var(--spice-text);
 }
 
 // progress bar (how much remaining)
 .x-progressBar-sliderArea {
-    height: 6px;
-    background-color: var(--spice-custom-main-secondary) !important;
+    background-color: var(--bg-color);
 }
 
 //////////////////////////////////////// Left Player ////////////////////////////////////////
