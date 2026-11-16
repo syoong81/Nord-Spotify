@@ -10,6 +10,7 @@ import Snippet from "./features/snippets/snippets"
 import HideWindowsControls from "./features/hideWindowsControls/hideWindowsControls"
 import DynamicColors from "./features/colorScheme/dynamicColors/dynamicColors"
 import ColorScheme from "./features/colorScheme/colorScheme"
+import LyricsBlur from "./features/lyricsBlur/lyricsBlur"
 import ImmersiveView from "./features/ImmersiveView/ImmersiveView"
 
 import Popup from "./ui/Popup/Popup"
@@ -29,6 +30,7 @@ export default async function nord() {
     ImmersiveView()
 
     Snippet.init()
+    LyricsBlur.init()
     await HideWindowsControls.init()
     await State.init()
     await Banner.init()
