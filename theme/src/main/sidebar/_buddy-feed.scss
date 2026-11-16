@@ -68,3 +68,28 @@
         }
     }
 }
+
+//////////////////////////////////////// Listening activity panel (Spotify 1.3.x) ////////////////////////////////////////
+
+[data-testid="new-listening-activity-row"] {
+    // cover art and profile picture
+    [data-testid="friend-activity-images"] {
+        .x-entityImage-imageContainer,
+        .main-image-image,
+        button {
+            border-radius: 8px;
+        }
+    }
+
+    // username, song, artist
+    a:hover {
+        color: var(--spice-custom-link-hover);
+    }
+}
+
+// panel close button
+[data-testid="PanelHeader_CloseButton"] button {
+    color: var(--spice-text);
+    background-color: var(--spice-custom-main-soft-secondary);
+    border-radius: 10px;
+}
