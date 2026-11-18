@@ -22,10 +22,15 @@ State as of 2026-11-15, tested on Spotify 1.3.9.2055 with Spicetify 2.46.7 (Wind
 
 ## Still to do
 
-1. **Unmaintained add-on styles** (`theme/src/third-parties/extensions/`): Sort by Play Count and Spotify Genres
-   (Tetrax-10/Spicetify-Extensions, archived May 2025), Sleep Timer (p0rtL6, archived 2021), Playlist Filter and
-   Queue Time (original repos gone). Not tested; candidates for removal along with their dead selectors.
-   Beautiful Lyrics (surfbryce, last update Nov 2025) not tested yet.
+1. **Unmaintained add-on styles** (`theme/src/third-parties/extensions/`). Tested 2026-11-18:
+   - Sort by Play Count (archived): works; its settings popup and profile menu item pick up Nord's styling.
+   - Spotify Genres (archived): broken on Spotify 1.3.9 whatever the theme. It reads `Player.data.track`, which is now
+     `data.item`, so it throws on every song change and never shows genres. Its Nord styles are dead.
+   - Sleep Timer (p0rtL6, archived): its profile submenu works and looks like Spotify's menus. Nord's
+     `_sleep-timer.scss` targets `#sleep-timer-menu`, which this extension never creates, so those styles were written
+     for a different sleep timer and are dead.
+   - Playlist Filter, Queue Time: original repos gone; not tested.
+   Candidates for removal: the Spotify Genres, Sleep Timer, Playlist Filter and Queue Time styles.
 2. **Remaining dead selectors.** Latest audit (`node dev/tools/audit.mjs` then `node dev/tools/analyze.cjs`,
    both local and git-ignored): 178 of 652 selectors match. Visual sweep of home, playlist, album, artist, discography,
    search, genre, podcast, lyrics, Quick Search, context menu and the friends panel found nothing else broken. Most of
@@ -39,7 +44,8 @@ State as of 2026-11-15, tested on Spotify 1.3.9.2055 with Spicetify 2.46.7 (Wind
 
 - Add-ons (2026-11-18): Lyrics Plus, New Releases (both bundled with Spicetify) and Marketplace tested in the live
   client; all pick up Nord's styling with nothing broken. Settings menu font tutorial link points at the README's
-  Custom Fonts section.
+  Custom Fonts section. Beautiful Lyrics (installed from Marketplace) draws its own lyrics page over Nord
+  without clashing; only checked on a song with no lyrics.
 - `Change Page's Banner On Song Change` tested with real track skips (volume at 0): on, a playlist page's banner
   switches to the new song's album art; off, it stays. Home shows the song art, and returning to the playlist
   restores its own image.
