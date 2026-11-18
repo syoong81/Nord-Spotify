@@ -3,7 +3,7 @@
     "description": "Nord Themed Spotify",
     "author": "Tetrax-10",
     "license": "MIT",
-    "homepage": "https://tetrax-10.github.io/Nord-Spotify/",
+    "homepage": "https://github.com/syoong81/Nord-Spotify",
     "main": "./src/app.tsx",
     "repository": {
         "type": "git",

@@ -35,11 +35,12 @@ State as of 2026-11-15, tested on Spotify 1.3.9.2055 with Spicetify 2.46.7 (Wind
    add-on integrations are checked.
 4. **Untested:** macOS and Linux, Premium accounts. `Change Page's Banner On Song Change` was only checked
    with a simulated song change, not real playback.
-5. **Build tooling:** CI still uses Node 16 and spicetify-creator 1.0.13; `npm run build-repo` must be run
-   before committing so `Nord/` holds the current build.
 
 ## Done since the first pass
 
+- CI: one `Build` workflow on `main` (Node 22) lints, runs `npm run build-repo` and fails if the committed `Nord/`
+  differs from the build. The old `dist` deploy and auto-format commits are gone. Still run `npm run build-repo`
+  before committing.
 - Fork links: manifest, install scripts, README, issue template and the settings menu links (Like on GitHub,
   How to Reposition Banners, custom font tutorial) point at syoong81/Nord-Spotify `main`. Discord and Stock UI
   sections removed from the README. Verified in the live client.
