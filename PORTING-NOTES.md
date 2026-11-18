@@ -38,7 +38,7 @@ State as of 2026-11-15, tested on Spotify 1.3.9.2055 with Spicetify 2.46.7 (Wind
 
 ## Done since the first pass
 
-- CI: one `Build` workflow on `main` (Node 22) lints, runs `npm run build-repo` and fails if the committed `Nord/`
+- CI: one `Build` workflow on `main` (Node 26 LTS) lints, runs `npm run build-repo` and fails if the committed `Nord/`
   differs from the build. The old `dist` deploy and auto-format commits are gone. Still run `npm run build-repo`
   before committing.
 - Fork links: manifest, install scripts, README, issue template and the settings menu links (Like on GitHub,
