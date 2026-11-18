@@ -31,11 +31,13 @@ State as of 2026-11-15, tested on Spotify 1.3.9.2055 with Spicetify 2.46.7 (Wind
    page equaliser), for add-ons that aren't installed (Marketplace, Lyrics Plus, etc.), or for snippet/popup states
    the audit can't open (Keyboard Shortcuts modal, confirm dialogs). They are harmless but could be deleted once the
    add-on integrations are checked.
-3. **Untested:** macOS and Linux, Premium accounts. `Change Page's Banner On Song Change` was only checked
-   with a simulated song change, not real playback.
+3. **Untested:** macOS and Linux, Premium accounts.
 
 ## Done since the first pass
 
+- `Change Page's Banner On Song Change` tested with real track skips (volume at 0): on, a playlist page's banner
+  switches to the new song's album art; off, it stays. Home shows the song art, and returning to the playlist
+  restores its own image.
 - What's New (`/content-feed`) checked with a populated feed: chips, release rows, buttons and text follow the
   scheme. The grey gradient behind each cover is Spotify's own (`--spice-button-disabled` to `--spice-main`),
   so it follows the scheme too; left as is.
