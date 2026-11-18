@@ -22,6 +22,23 @@ export default function getSettingsMenuActionInputProps() {
                 },
             ],
         },
+        bannerBehindTrackList: {
+            name: "Show Banner Behind Track Lists",
+            info: "background opacity, 0 to 100",
+            field: "trackListBgOpacity",
+            disableWhenFieldIsFalse: "bannerBehindTrackList",
+            onChangeHandler: () => {
+                Utils.dom.removeInjectedElement("bannerBehindTrackList")
+                dynamicallyGeneratedCss.utils.toggle("bannerBehindTrackList")
+            },
+            buttons: [
+                {
+                    icon: "check",
+                    field: "bannerBehindTrackList",
+                    onClickHandler: () => dynamicallyGeneratedCss.utils.toggle("bannerBehindTrackList"),
+                },
+            ],
+        },
         bannerBlur: {
             name: "Banner Blur Amount",
             info: "0 to 100",

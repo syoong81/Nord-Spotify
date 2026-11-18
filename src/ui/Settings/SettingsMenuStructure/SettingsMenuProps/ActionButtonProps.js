@@ -8,18 +8,10 @@ import State from "../../../../state/state"
 
 export default function getSettingsMenuActionButtonProps() {
     return {
-        autoExpandLibX: {
-            name: "Auto Expand Library X",
-            info: "Auto Expand Library X on non collapse mode",
-            field: "autoExpandLibX",
-            visibility: window.Nord.shared.isLibX ? true : false,
-            onClickHandler: () => RegularSnippets.utils.toggle("autoExpandLibX"),
-        },
         minimalistLibX: {
             name: "Minimalistic Library X",
             info: "Hides sub titles in Library X",
             field: "minimalistLibX",
-            visibility: window.Nord.shared.isLibX ? true : false,
             onClickHandler: () => RegularSnippets.utils.toggle("minimalistLibX"),
         },
         showBanner: {
@@ -32,9 +24,9 @@ export default function getSettingsMenuActionButtonProps() {
             field: "fullPageBanner",
             onClickHandler: () => {
                 if (LocalStorage.config.fullPageBanner && LocalStorage.config.showBanner) {
-                    Snippet.utils.injectClassDynamicUI(conditionalSnippets.bigBannerLibX, conditionalSnippets.bigBannerOld)
+                    Snippet.utils.injectConditionedClass(conditionalSnippets.bigBannerLibX)
                 } else {
-                    Snippet.utils.injectClassDynamicUI(conditionalSnippets.bigBannerLibX, conditionalSnippets.bigBannerOld, false)
+                    Snippet.utils.injectConditionedClass(conditionalSnippets.bigBannerLibX, false)
                 }
             },
         },
@@ -118,11 +110,6 @@ export default function getSettingsMenuActionButtonProps() {
             name: "Search ( Ctrl + / )",
             field: "search",
             onClickHandler: () => JsSnippets.snippets.search(),
-        },
-        redo: {
-            name: "Redo ( Ctrl + Shift + z )",
-            field: "redo",
-            onClickHandler: () => JsSnippets.snippets.redo(),
         },
     }
 }

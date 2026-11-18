@@ -13,10 +13,6 @@ export function createColorScheme(colors) {
     Object.entries(colors).forEach(([field, hex]) => {
         if (field === "Name") return
 
-        if (field === "sidebar") {
-            hex = window.Nord.shared.isLibX ? colors.sidebar : colors.main
-        }
-
         const spiceVar = keyToSpiceVar(field, "--spice-")
         const rgbSpiceVar = keyToSpiceVar(field, "--spice-rgb-")
 
@@ -39,7 +35,7 @@ export async function injectColorScheme(colorScheme = LocalStorage.config.colorS
     Shared.SpicetifyConfig.color_scheme = colorScheme
 
     if (colorScheme == "Dynamic") {
-        await DynamicColors.inject()
+        await DynamicColors.inject(true)
     } else {
         Utils.dom.injectCSS(createColorScheme(LocalStorage.config.colorSchemes[colorScheme]), colorScheme)
     }

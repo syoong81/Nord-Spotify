@@ -1,5 +1,4 @@
-import React from "react"
-import ReactDOM from "react-dom"
+import React from "../../shims/react"
 
 import "./MiniPopup.scss"
 import Utils from "../../utils/utils"
@@ -53,7 +52,7 @@ export default async function MiniPopup({
     reactModalPortal.className = "ReactModalPortal tetrax-mini-popup"
     document.body.appendChild(reactModalPortal)
 
-    ReactDOM.render(<MiniPopupComponent />, reactModalPortal)
+    Utils.dom.renderReact(<MiniPopupComponent />, reactModalPortal)
 
     const modalOverlay = await Utils.dom.waitForElement(".tetrax-mini-popup > .GenericModal__overlay", 1000)
 

@@ -1,10 +1,9 @@
 {
     "colorScheme": "Nord",
     "dynamicColorMode": "atmos",
-    "uiMode": "oldui",
     "hideWindowsControls": true,
     "hideWindowsControlsValues": {
-        "height": "31",
+        "height": "64",
         "width": "135",
         "filter": "2.13"
     },
@@ -13,7 +12,6 @@
     "customFontURL": "https://fonts.googleapis.com/css2?family=Quicksand:wght@500&display=swap",
     "fontSizeBool": false,
     "fontSize": "100%",
-    "autoExpandLibX": true,
     "minimalistLibX": true,
 
     "showBanner": true,
@@ -25,6 +23,8 @@
     "bannerBlur": false,
     "bannerBlurValue": "10",
     "fitBannerImage": false,
+    "bannerBehindTrackList": true,
+    "trackListBgOpacity": "0",
 
     "hideHomePageRecommendation": false,
     "hoverTime": true,
@@ -35,7 +35,6 @@
 
     "quickSearch": false,
     "search": false,
-    "redo": false,
 
     "rightClickToReload": false,
 

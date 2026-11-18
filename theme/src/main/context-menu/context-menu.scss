@@ -1,6 +1,7 @@
 //////////////////////////////////////// Main ////////////////////////////////////////
 
 // rounded context menu
+#context-menu > [role="menu"],
 .main-contextMenu-menu {
     border-radius: 15px; // extra border radius so always rounded
 }
@@ -22,6 +23,7 @@
 //////////////////////////////////////// Scrollbar ////////////////////////////////////////
 
 // context menu hide scrollbar
+#context-menu > [role="menu"]::-webkit-scrollbar,
 .main-contextMenu-menu::-webkit-scrollbar {
     display: none;
 }
@@ -29,6 +31,8 @@
 //////////////////////////////////////// Disabled ////////////////////////////////////////
 
 // disabled context menu
+.main-contextMenu-menuItemButton[aria-disabled="true"],
+.main-contextMenu-menuItemButton[aria-disabled="true"]:hover,
 .main-contextMenu-menuItemButton.main-contextMenu-disabled,
 .main-contextMenu-menuItemButton.main-contextMenu-disabled:hover {
     color: rgba(var(--spice-rgb-text), 0.2) !important;

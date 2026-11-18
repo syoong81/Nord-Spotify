@@ -5,7 +5,16 @@ import conditionalSnippets from "../snippets/externalCssSnippets/conditionalSnip
 import Snippet from "../snippets/snippets"
 
 export async function injectAndStyleBanners() {
-    const mainView = await Utils.dom.waitForElement(".under-main-view", 1000)
+    let mainView = await Utils.dom.waitForElement(".under-main-view, .Root__main-view", 1000)
+
+    // Spotify removed its own `.under-main-view` layer, and everything inside `.main-view-container`
+    // is re-rendered on navigation, so the banner gets its own layer directly under the main view
+    if (!mainView.classList.contains("under-main-view")) {
+        const bannerLayer = document.createElement("div")
+        bannerLayer.className = "under-main-view nord-banner-layer"
+        mainView.prepend(bannerLayer)
+        mainView = bannerLayer
+    }
 
     // inject main banner
     const banner = document.createElement("div")
@@ -100,9 +109,9 @@ async function updateState(rawData) {
 
     if (State.app.changeStateSrc === "songchange" || !State.app.isBannerPage || LocalStorage.config.songBannersOnly) {
         if (State.app.islocal) {
-            State.app.uri = rawData.data.track.uri
+            State.app.uri = Utils.player.getTrack(rawData.data).uri
         } else {
-            State.app.uri = rawData.data.track.metadata.album_uri
+            State.app.uri = Utils.player.getTrack(rawData.data).metadata.album_uri
         }
 
         State.app.uid = Utils.path.uriToUID(State.app.uri) // this wrapped inside a try catch block. idk why
@@ -114,7 +123,7 @@ async function updateState(rawData) {
         State.app.previousUri = State.app.uri
         State.app.shouldChangeProp = true
 
-        State.app.image = rawData.data.track.metadata.image_xlarge_url
+        State.app.image = Utils.player.getTrack(rawData.data).metadata.image_xlarge_url
     } else if (State.app.isBannerPage) {
         State.app.uri = Utils.path.pathToURI(State.app.path)
         State.app.uid = Utils.path.pathToUID(State.app.path)
@@ -132,18 +141,45 @@ async function updateState(rawData) {
     }
 }
 
+function largestImage(sources = []) {
+    const size = (source) => source.width ?? source.maxWidth ?? 0
+    return [...sources].sort((a, b) => size(b) - size(a))[0]?.url
+}
+
+// The web API (api.spotify.com) now rejects requests made from the client, so page images come from Spotify's GraphQL API
+async function fetchPageImage() {
+    const { Request, Definitions } = Spicetify.GraphQL
+    const uri = State.app.uri
+    let response
+
+    switch (State.app.pageType) {
+        case "albums":
+            response = await Request(Definitions.getAlbum, { uri: uri, locale: "", offset: 0, limit: 1 })
+            return largestImage(response.data.albumUnion.coverArt.sources)
+        case "artists":
+            response = await Request(Definitions.queryArtistOverview, { uri: uri, locale: "", includePrerelease: false })
+            return largestImage(response.data.artistUnion.visuals.avatarImage.sources)
+        case "shows":
+            response = await Request(Definitions.fetchExtractedColorAndImageForPodcastEntity, { uri: uri })
+            return largestImage(response.data.podcastUnionV2.coverArt.sources)
+        case "episodes":
+            response = await Request(Definitions.fetchExtractedColorAndImageForEpisodeEntity, { uri: uri })
+            return largestImage(response.data.episodeUnionV2.coverArt.sources)
+    }
+}
+
 async function fetchBannerImage(rawData = Spicetify.Player) {
     try {
+        if (!State.app.isBannerPage) {
+            return Utils.player.getTrack(rawData.data).metadata.image_xlarge_url
+        }
+
         if (State.app.pageType == "playlists") {
-            rawData = await Spicetify.Platform.PlaylistAPI.getMetadata(`spotify:playlist:${State.app.uid}`)
-            if (rawData.images.length > 1) return rawData.images.pop()["url"]
+            const metadata = await Spicetify.Platform.PlaylistAPI.getMetadata(`spotify:playlist:${State.app.uid}`)
+            return metadata.images[metadata.images.length - 1]?.url
         }
-        if (State.app.isBannerPage) {
-            rawData = await Spicetify.CosmosAsync.get(`https://api.spotify.com/v1/${State.app.pageType}/${State.app.uid}`)
-            return rawData.images[0]["url"]
-        } else {
-            return rawData.data.track.metadata.image_xlarge_url
-        }
+
+        return await fetchPageImage()
     } catch (err) {
         console.error(`Nord:unexpected: Can't fetch banner image > from: \`fetchBannerImage()\` > error: ${err}`)
     }
@@ -187,7 +223,7 @@ function fixBannerPage() {
     const currentPage = fixPages[State.app.pageType]
     const otherPages = Object.values(fixPages).filter((className) => className !== currentPage)
 
-    Snippet.utils.injectConditionedClass(currentPage)
+    if (currentPage) Snippet.utils.injectConditionedClass(currentPage)
     otherPages.forEach((className) => Snippet.utils.injectConditionedClass(className, false))
 }
 
@@ -201,12 +237,12 @@ export function hideOrShowBanner() {
     ) {
         hideOrShowLyricsPageBanners()
         if (LocalStorage.config.fullPageBanner) {
-            Snippet.utils.injectClassDynamicUI(conditionalSnippets.bigBannerLibX, conditionalSnippets.bigBannerOld)
+            Snippet.utils.injectConditionedClass(conditionalSnippets.bigBannerLibX)
         }
         Snippet.utils.injectConditionedClass(conditionalSnippets.hidePageDetails, LocalStorage.config.hidePageDetails)
         banner.style.display = "unset"
     } else {
-        Snippet.utils.injectClassDynamicUI(conditionalSnippets.bigBannerLibX, conditionalSnippets.bigBannerOld, false)
+        Snippet.utils.injectConditionedClass(conditionalSnippets.bigBannerLibX, false)
         Snippet.utils.injectConditionedClass(conditionalSnippets.hidePageDetails, false)
         banner.style.display = "none"
     }
@@ -221,6 +257,6 @@ export function canBannerInteractWithPlayerBar() {
         document.querySelector(".main-nowPlayingBar-left button:hover") ||
         document.querySelector(".main-nowPlayingBar-right button:hover") ||
         document.querySelector(".main-nowPlayingBar-right svg:hover") ||
-        document.querySelector(".volume-bar:hover")
+        document.querySelector(".volume-bar:hover, [data-testid=\"volume-bar\"]:hover")
     )
 }

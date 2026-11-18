@@ -1,40 +1,58 @@
 //////////////////////////////////////// Center Player ////////////////////////////////////////
 
 // player center buttons allign center
-.player-controls__buttons--new-icons {
+.player-controls__buttons {
     margin-top: 8px;
 }
 
 // change appearance of play button in player
-.main-playPauseButton-button {
+[data-testid="control-button-playpause"] {
     color: inherit;
     background-color: transparent;
 }
-.main-playPauseButton-button svg {
+// the round background now sits on an inner span
+[data-testid="control-button-playpause"] > span {
+    color: inherit;
+    background-color: transparent !important;
+}
+[data-testid="control-button-playpause"] svg {
     height: 19px;
     width: 19px;
     transform: scale(1.5);
 }
 
 // if no player, pause button disabled background color made transparent
-.main-playPauseButton-button[disabled] {
+[data-testid="control-button-playpause"][disabled] {
     background-color: var(--spice-main);
 }
 
 //////////////////////////////////////// Progress Bar ////////////////////////////////////////
 
+// size and colours go through Spotify's own variables, so every layer of the bar
+// (and extensions that read them) agree on the dimensions
+.progress-bar {
+    --progress-bar-height: 6px;
+    --progress-bar-radius: 50px;
+    // filled part, also while hovered
+    --fg-color: var(--spice-custom-selected-button) !important;
+    --is-active-fg-color: var(--spice-custom-selected-button) !important;
+    // remaining part
+    --bg-color: var(--spice-custom-main-secondary) !important;
+}
+
 // progress bar (how much filled)
 .x-progressBar-fillColor {
-    border-radius: 50px;
-    height: 6px;
-    background-color: var(--spice-custom-selected-button) !important;
     transition: transform, 0s, ease, 0.25s;
+}
+
+// keep the drag handle lighter than the filled part so it stays visible
+.progress-bar__slider {
+    background-color: var(--spice-text);
 }
 
 // progress bar (how much remaining)
 .x-progressBar-sliderArea {
-    height: 6px;
-    background-color: var(--spice-custom-main-secondary) !important;
+    background-color: var(--bg-color);
 }
 
 //////////////////////////////////////// Left Player ////////////////////////////////////////
@@ -63,6 +81,8 @@
 }
 
 // player active button like shuffle, repeat, queue, lyrics
+// shuffle has no aria state, only Spotify's accent colour class
+.main-nowPlayingBar-center button.encore-internal-color-text-bright-accent,
 .main-nowPlayingBar-nowPlayingBar button.control-button--active,
 .main-nowPlayingBar-nowPlayingBar button[aria-checked="mixed"],
 .main-nowPlayingBar-nowPlayingBar button[data-active="true"],
@@ -77,6 +97,11 @@
 }
 
 // hide dots under active button
+.main-nowPlayingBar-center button.encore-internal-color-text-bright-accent::before,
+.main-nowPlayingBar-center button.encore-internal-color-text-bright-accent::after,
+.main-nowPlayingBar-nowPlayingBar button[aria-checked="true"]::before,
+.main-nowPlayingBar-nowPlayingBar button[aria-checked="mixed"]::before,
+.main-nowPlayingBar-nowPlayingBar button[data-active="true"]::after,
 .main-shuffleButton-button.main-shuffleButton-active:after,
 .main-repeatButton-button.main-repeatButton-active:after,
 // queue 

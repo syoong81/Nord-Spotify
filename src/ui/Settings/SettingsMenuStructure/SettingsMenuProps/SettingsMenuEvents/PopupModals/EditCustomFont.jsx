@@ -1,4 +1,4 @@
-import React from "react"
+import React from "../../../../../../shims/react"
 
 import "./EditColorScheme"
 
@@ -10,7 +10,7 @@ export default function editCustomFontPopup() {
     const TextProps = [
         ["Para", "If you have the font installed in your PC, then just enter the font's name else enter both font name and Google font URL"],
         ["LittleSpace"],
-        ["Link", { content: "Open step-by-step Tutorial", url: "https://github.com/Tetrax-10/Nord-Spotify#custom-fonts" }],
+        ["Link", { content: "Open step-by-step Tutorial", url: "https://github.com/syoong81/Nord-Spotify#custom-fonts" }],
     ]
 
     const ActionInputProps = {

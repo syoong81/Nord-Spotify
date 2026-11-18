@@ -2,14 +2,17 @@ body {
     &.nord- {
         // hide homepage recommendation
         &hideHomePageRecommendation {
-            section[data-testid="home-page"] .main-shelf-shelf:not([aria-label="Recently played"]) {
+            section[data-testid="home-page"] .main-shelf-shelf:not([aria-label="Recently played"]),
+            section[data-testid="home-page"] section[data-testid="component-shelf"]:not([aria-label="Recently played"]):not([aria-label="Recents"]) {
                 display: none !important;
             }
         }
 
         // remove liked songs card in your library
         &hideLikedSongsCard {
-            .collection-collectionEntityHeroCard-likedSongs {
+            .collection-collectionEntityHeroCard-likedSongs,
+            // the hero card is gone; Liked Songs is now an ordinary row in Your Library
+            .main-yourLibraryX-listItem:has(img[src*="liked-songs"]) {
                 display: none;
             }
         }
@@ -19,7 +22,9 @@ body {
             .playlist-playlist-seeMore,
             .playlist-playlist-playlistInlineCurationSection,
             .playlist-playlist-searchResultListContainer,
-            .playlist-playlist-recommendedTrackList {
+            .playlist-playlist-recommendedTrackList,
+            .playlist-playlist-findMoreButton,
+            div:has(> [data-testid="recommended-track"]) {
                 display: none !important;
             }
         }
@@ -33,14 +38,18 @@ body {
 
         // hover timestamp
         &hoverTime {
-            .playback-bar__progress-time-elapsed,
-            .main-playbackBarRemainingTime-container {
+            [data-testid="playback-position"],
+            [data-testid="playback-duration"] {
                 opacity: 0;
             }
         }
 
         // center lyrics
         &centeredLyrics {
+            // the lyrics page only has generated class names now; its container carries these inline variables
+            [style*="--lyrics-color-active"] {
+                text-align: center;
+            }
             .lyrics-lyrics-container {
                 .lyrics-lyrics-contentContainer {
                     justify-content: center !important;
@@ -55,16 +64,9 @@ body {
             }
         }
 
-        &autoExpandLibX {
-            .main-yourLibraryX-entryPoints:has(
-                    ~ .main-yourLibraryX-library .main-yourLibraryX-libraryContainer:not([class*="main-yourLibraryX-libraryIsCollapsed"])
-                ) {
-                display: none;
-            }
-        }
-
         &minimalistLibX {
-            .main-yourLibraryX-listRowSubtitle {
+            .main-yourLibraryX-listRowSubtitle,
+            .main-yourLibraryX-listItem [data-encore-id="listRowSubtitle"] {
                 display: none;
             }
         }

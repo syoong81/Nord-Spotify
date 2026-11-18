@@ -1,16 +1,15 @@
 const Api = (() => {
+    // "sp://desktop/v1/version" no longer resolves on current Spotify, so read the OS from the client itself
     async function getOS() {
-        const systemInfo = await Spicetify.CosmosAsync.get("sp://desktop/v1/version")
-        return systemInfo.platform
-    }
+        const classList = document.documentElement.classList
+        if (classList.contains("spotify__os--is-windows")) return "Windows"
+        if (classList.contains("spotify__os--is-macos")) return "Mac"
+        if (classList.contains("spotify__os--is-linux")) return "Linux"
 
-    async function isPremium() {
-        let data = await Spicetify.CosmosAsync.get("sp://product-state/v1/values")
-        if (data.catalogue == "premium" || data.name == "Spotify Premium" || data.type == "premium") {
-            return true
-        } else {
-            return false
-        }
+        const userAgent = navigator.userAgent
+        if (userAgent.includes("Windows")) return "Windows"
+        if (userAgent.includes("Mac")) return "Mac"
+        return "Linux"
     }
 
     function getFromClipboard() {
@@ -27,28 +26,9 @@ const Api = (() => {
         Spicetify.showNotification(text, isError, ms)
     }
 
-    async function isAppLaterThan(specifiedVersion) {
-        let appInfo = await Spicetify.CosmosAsync.get("sp://desktop/v1/version")
-        let result = appInfo.version.localeCompare(specifiedVersion, undefined, { numeric: true, sensitivity: "base" })
-
-        return result === 1
-    }
-
-    async function isAppEarlierThan(specifiedVersion) {
-        let appInfo = await Spicetify.CosmosAsync.get("sp://desktop/v1/version")
-        let result = appInfo.version.localeCompare(specifiedVersion, undefined, { numeric: true, sensitivity: "base" })
-
-        return result !== 1
-    }
-
     return {
         get: {
             os: getOS,
-            premiumStatus: isPremium,
-        },
-        app: {
-            laterThan: isAppLaterThan,
-            earlierThan: isAppEarlierThan,
         },
         send: {
             notification: notification,

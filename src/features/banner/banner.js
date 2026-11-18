@@ -18,7 +18,7 @@ const Banner = (() => {
 
     async function init() {
         const player = await Utils.dom.waitForElement(".Root__now-playing-bar", 1000)
-        const topBar = await Utils.dom.waitForElement(".Root__top-bar", 1000)
+        const topBar = await Utils.dom.waitForElement(".Root__top-bar, .Root__globalNav", 1000)
         const zoomOutKey = "`"
 
         const banner = await injectAndStyleBanners()
@@ -37,7 +37,7 @@ const Banner = (() => {
         })
 
         player.addEventListener("wheel", (event) => {
-            if (document.querySelector(".volume-bar:hover")) return
+            if (document.querySelector(".volume-bar:hover, [data-testid=\"volume-bar\"]:hover")) return
 
             if (player.matches(":hover") && State.app.isValidBannerPage) {
                 banner.style.transition = disableTransition

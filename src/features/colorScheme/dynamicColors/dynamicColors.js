@@ -7,8 +7,9 @@ import Utils from "../../../utils/utils"
 import ColorScheme from "../colorScheme"
 
 const DynamicColors = (() => {
-    async function inject() {
-        if (Shared.SpicetifyConfig.color_scheme === "Dynamic" && State.app.shouldChangeProp) {
+    // force: recompute even though the page/song image is unchanged (the user just picked Dynamic or a new mode)
+    async function inject(force = false) {
+        if (Shared.SpicetifyConfig.color_scheme === "Dynamic" && State.app.image && (force || State.app.shouldChangeProp)) {
             let colorPalette = await createDynamicColors()
             State.app.dynamicColorPalette = colorPalette
             updateDynamicColors(colorPalette)
@@ -53,11 +54,17 @@ const DynamicColors = (() => {
                             let palette = singleColorToPalette(`rgb(${R},${G},${B})`)
                             resolve(palette)
                         }
+                        // an image that never loads would otherwise leave the colours unchanged forever
+                        image.onerror = () => resolve(null)
                     })
+                    if (!colorPalette) {
+                        mainColors = await fetchDynamicColor(formatedImage)
+                        colorPalette = singleColorToPalette(mainColors.dark)
+                    }
                     break
                 case "DARK_VIBRANT":
                 case "LIGHT_VIBRANT":
-                    mainColors = await Spicetify.colorExtractor(State.app.uri)
+                    mainColors = await fetchVibrantColors(formatedImage)
                     colorPalette = singleColorToPalette(mainColors[LocalStorage.config.dynamicColorMode])
                     break
             }
@@ -117,11 +124,8 @@ const DynamicColors = (() => {
 
     async function fetchDynamicColor(dynamicImageUri) {
         try {
-            let rawData = await Spicetify.CosmosAsync.get(
-                encodeURI(
-                    `https://api-partner.spotify.com/pathfinder/v1/query?operationName=fetchExtractedColors&variables={"uris":["${dynamicImageUri}"]}&extensions={"persistedQuery":{"version":1,"sha256Hash":"d7696dd106f3c84a1f3ca37225a1de292e66a2d5aced37a66632585eeb3bbbfa"}}`
-                )
-            )
+            // the old pathfinder URL and its query hash no longer work, so use the query Spotify ships with the client
+            let rawData = await Spicetify.GraphQL.Request(Spicetify.GraphQL.Definitions.fetchExtractedColors, { imageUris: [dynamicImageUri] })
 
             let extractedColors = rawData.data.extractedColors[0]
             return { dark: extractedColors.colorDark.hex, light: extractedColors.colorLight.hex, raw: extractedColors.colorRaw.hex }
@@ -130,6 +134,22 @@ const DynamicColors = (() => {
                 `Nord:unexpected: can't fetch dynamic color from Spotify API (atmosphere mode) > from: \`fetchDynamicColor()\` > error: ${err}`
             )
         }
+    }
+
+    // Spicetify.colorExtractor's endpoint is often unavailable, so fall back to the colors Spotify extracts itself
+    async function fetchVibrantColors(dynamicImageUri) {
+        let vibrantColors
+
+        try {
+            vibrantColors = await Spicetify.colorExtractor(State.app.uri)
+        } catch (err) {
+            vibrantColors = null
+        }
+
+        if (vibrantColors?.DARK_VIBRANT && vibrantColors?.LIGHT_VIBRANT) return vibrantColors
+
+        const extractedColors = await fetchDynamicColor(dynamicImageUri)
+        return { DARK_VIBRANT: extractedColors.dark, LIGHT_VIBRANT: extractedColors.light }
     }
 
     function singleColorToPalette(mainColor) {
@@ -165,18 +185,8 @@ const DynamicColors = (() => {
         Utils.dom.injectCSS(ColorScheme.create(colorPalette), "Dynamic")
     }
 
-    function disableMarketplaceDynamicColors() {
-        if (LocalStorage.utils.get("marketplace:albumArtBasedColors") != "false") {
-            LocalStorage.utils.set("marketplace:albumArtBasedColors", "false")
-            Utils.utils.forceReload()
-        }
-    }
-
     return {
         inject: inject,
-        utils: {
-            disableMarketplaceDynamicColors: disableMarketplaceDynamicColors,
-        },
     }
 })()
 

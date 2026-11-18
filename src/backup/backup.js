@@ -4,17 +4,35 @@ import Api from "../services/api"
 import Utils from "../utils/utils"
 
 const Backup = (() => {
+    const pendingNotificationKey = "nord:pendingNotification"
+
+    // A restore reloads the app half a second later, which used to wipe the success message before
+    // it could be read. Keep it across the reload and show it once Nord has started again.
+    function showPendingNotification() {
+        const message = LocalStorage.utils.get(pendingNotificationKey)
+        if (!message) return
+
+        localStorage.removeItem(pendingNotificationKey)
+        Api.send.notification(message, false, 4000)
+    }
+
     function importData(data, mode = undefined) {
         if (data.hideHomePageRecommendation !== undefined && mode === undefined) {
             LocalStorage.saveConfig(data)
 
-            Api.send.notification("Nord settings restored successfully")
-        } else if (data["a:5YDSZWizEYBsXgk6kwxvMn"] !== undefined || data["spotify:album:5YDSZWizEYBsXgk6kwxvMn"] !== undefined) {
+            LocalStorage.utils.set(pendingNotificationKey, "Nord settings restored successfully")
+        } else if (
+            // chosen explicitly from a full backup: any set of positions is valid, including an empty one
+            (mode === "banner" && data && typeof data === "object" && !Array.isArray(data)) ||
+            // a banner-only backup, recognised by the entry every default config ships with
+            data["a:5YDSZWizEYBsXgk6kwxvMn"] !== undefined ||
+            data["spotify:album:5YDSZWizEYBsXgk6kwxvMn"] !== undefined
+        ) {
             LocalStorage.saveConfig("bannerPosition", data)
 
-            Api.send.notification("Banner positions restored successfully")
+            LocalStorage.utils.set(pendingNotificationKey, "Banner positions restored successfully")
         } else {
-            Api.send.notification("Falied to Restore, backup data seems to be Corrupted!", true, 4000)
+            Api.send.notification("Failed to Restore, backup data seems to be Corrupted!", true, 4000)
             return
         }
 
@@ -47,16 +65,38 @@ const Backup = (() => {
         }
     }
 
-    function exportSettings(mode) {
-        switch (mode) {
-            case "all":
-                Api.clipboard.send(Utils.json.JSONToString(LocalStorage.config))
-                break
-            case "banners":
-                Api.clipboard.send(Utils.json.JSONToString(LocalStorage.config.bannerPosition))
-                break
+    async function exportSettings(mode, target = "clipboard") {
+        const isBanners = mode === "banners"
+        const data = Utils.json.JSONToString(isBanners ? LocalStorage.config.bannerPosition : LocalStorage.config)
+
+        if (target !== "file") {
+            Api.clipboard.send(data)
+            Api.send.notification("Export Data Copied to Clipboard")
+            return
         }
-        Api.send.notification("Export Data Copied to Clipboard")
+
+        try {
+            const fileName = await fileSaver(data, isBanners ? "nord-banner-positions-backup.json" : "nord-settings-backup.json")
+            Api.send.notification(`Backup saved to ${fileName}`)
+        } catch (err) {
+            // closing the save dialog without picking a file is not an error
+            if (err?.name === "AbortError") return
+
+            console.warn(`Nord:handled: Failed to save backup file > from: \`exportSettings()\` > error: ${err}`)
+            Api.send.notification("Failed to save the backup file", true, 4000)
+        }
+    }
+
+    async function fileSaver(text, suggestedName) {
+        const fileHandle = await window.showSaveFilePicker({
+            suggestedName: suggestedName,
+            types: [{ description: "Nord backup", accept: { "application/json": [".json"] } }],
+        })
+        const writable = await fileHandle.createWritable()
+        await writable.write(text)
+        await writable.close()
+
+        return fileHandle.name
     }
 
     async function filePicker() {
@@ -70,8 +110,10 @@ const Backup = (() => {
     return {
         import: importSettings,
         export: exportSettings,
+        showPendingNotification: showPendingNotification,
         utils: {
             filePicker: filePicker,
+            fileSaver: fileSaver,
         },
     }
 })()

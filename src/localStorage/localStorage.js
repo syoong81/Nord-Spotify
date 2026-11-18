@@ -36,6 +36,12 @@ const LocalStorage = ((defaultSettings, localStorageKey) => {
             }
         })
 
+        // Spotify's window controls grew from 31px to 64px tall (the height of the global nav bar),
+        // so move configs that still hold the old default to the new one
+        if (config.hideWindowsControlsValues.height === "31" && config.hideWindowsControlsValues.width === "135") {
+            config.hideWindowsControlsValues.height = defaultConfig.hideWindowsControlsValues.height
+        }
+
         // Add backward compatibility to banner positions
         Object.keys(config.bannerPosition).forEach((key) => {
             if (key.includes("spotify:")) {

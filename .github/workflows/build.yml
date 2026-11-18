@@ -1,0 +1,37 @@
+name: Build
+
+on:
+    push:
+        branches:
+            - main
+    pull_request:
+        branches:
+            - main
+
+jobs:
+    build:
+        name: Lint, build and check Nord/ is current
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v4
+
+            - name: Install Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version: 26.x
+                  cache: npm
+
+            - name: Install dependencies
+              run: npm ci
+
+            - name: Run ESLint
+              run: npm run lint
+
+            - name: Build theme
+              run: npm run build-repo
+
+            # the install scripts download Nord/ from main, so it must match the source
+            - name: Check committed build
+              run: git diff --exit-code --ignore-cr-at-eol -- Nord/ || (echo "::error::Nord/ is out of date. Run npm run build-repo and commit." && exit 1)

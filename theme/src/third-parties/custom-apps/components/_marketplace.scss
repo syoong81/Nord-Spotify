@@ -122,7 +122,7 @@
 }
 
 // marketplace external js
-.marketplace-grid .main-card-draggable .main-card-cardMetadata li.marketplace-card__tag[data-tag="external JS"] {
+.marketplace-grid .main-card-draggable [data-encore-id="card"] > div:has([data-encore-id="cardTitle"]) li.marketplace-card__tag[data-tag="external JS"] {
     background-color: var(--spice-notification-error) !important;
     color: var(--spice-text);
 }

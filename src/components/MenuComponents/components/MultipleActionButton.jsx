@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState } from "../../../shims/react"
 
 import LocalStorage from "../../../localStorage/localStorage"
 import { ActionButtonWrapper, Label } from "./MenuHelpers"

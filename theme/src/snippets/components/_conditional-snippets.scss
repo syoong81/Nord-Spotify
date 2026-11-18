@@ -5,7 +5,7 @@ body {
             .main-entityHeader-subtitle.main-entityHeader-small.main-entityHeader-uppercase.main-entityHeader-bold,
             .main-entityHeader-subtitle.main-entityHeader-gray,
             .main-entityHeader-metaData,
-            .main-entityHeader-headerText > span,
+            .main-entityHeader-pretitle,
             .main-entityHeader-headerText > div {
                 display: none;
             }
@@ -33,15 +33,6 @@ body {
             }
         }
 
-        &bigBannerOld {
-            // Big Playlist
-            .main-entityHeader-nonWrapped,
-            // Big artist 
-            .main-entityHeader-background {
-                height: calc(100vh - 78px) !important;
-            }
-        }
-
         &bigBannerLibX {
             // Big Playlist
             .main-entityHeader-nonWrapped,
@@ -49,14 +40,9 @@ body {
             .main-entityHeader-background {
                 height: calc(100vh - 128px) !important;
             }
-        }
-
-        &bigBannerOldImmersiveView {
-            // Big Playlist
-            .main-entityHeader-nonWrapped,
-            // Big artist 
-            .main-entityHeader-background {
-                height: calc(100vh - 1.2px) !important;
+            .main-entityHeader-container {
+                height: 100cqh !important;
+                max-height: none !important;
             }
         }
 
@@ -66,6 +52,10 @@ body {
             // Big artist 
             .main-entityHeader-background {
                 height: calc(100vh - 48.2px) !important;
+            }
+            .main-entityHeader-container {
+                height: 100cqh !important;
+                max-height: none !important;
             }
         }
 
@@ -108,6 +98,32 @@ body {
         }
 
         &bannerCSS {
+            // layer injected by Nord to hold the banner (replaces Spotify's removed .under-main-view)
+            .Root__main-view {
+                position: relative;
+                // lets the full page banner size the page header to the main view (100cqh)
+                container-type: size;
+            }
+            // Spotify now draws its own header image and gradient here; hide them while Nord's banner is shown
+            &:not(:has(#main-banner[style*="display: none"])) .main-view-container > .before-scroll-node {
+                display: none;
+            }
+            // solid track list background over the banner; the "Show Banner Behind Track Lists" setting
+            // overrides it with a see-through one (bannerBehindTrackList() in dynamicallyGeneratedCss/snippets.js)
+            &:not(:has(#main-banner[style*="display: none"])) {
+                .playlist-playlist-playlistContent,
+                section[data-testid="playlist-page"] > .contentSpacing:has(.main-trackList-trackListContainer),
+                section[data-testid="playlist-page"] .contentSpacing:has(> .search-searchCategory-contentArea),
+                section[data-testid="album-page"] > .contentSpacing:has(.main-trackList-trackListContainer) {
+                    background-color: var(--spice-main);
+                }
+            }
+            .nord-banner-layer {
+                position: absolute;
+                inset: 0;
+                overflow: hidden;
+                pointer-events: none;
+            }
             // banner css
             #main-banner {
                 position: absolute;

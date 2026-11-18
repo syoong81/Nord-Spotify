@@ -1,16 +1,12 @@
-# 📦 Archiving this theme repo due to time constraints. Feel free to fork and continue the development! 🍴
-
 # Nord (with Dynamic Theming)
 
 Nord Themed Spotify
 
-Wanna discuss or having issues with Nord? Ping `@Tetrax-10` on Discord
-
-<p align="left"><a href="https://discord.gg/DaUbPmbDwr"><img src="https://raw.githubusercontent.com/Tetrax-10/Nord-Spotify/master/assets/join-discord-button.png" width="150px"></a></p>
+Fork of [Tetrax-10/Nord-Spotify](https://github.com/Tetrax-10/Nord-Spotify), updated for Spotify 1.3.x and Spicetify 2.46.
 
 ### Download Theme
 
-<p align="left"><a href="#install-theme"><img src="https://raw.githubusercontent.com/Tetrax-10/Nord-Spotify/master/assets/download-button.png" width="150px"></a></p>
+<p align="left"><a href="#install-theme"><img src="https://raw.githubusercontent.com/syoong81/Nord-Spotify/main/assets/download-button.png" width="150px"></a></p>
 
 ---
 
@@ -20,41 +16,31 @@ Wanna discuss or having issues with Nord? Ping `@Tetrax-10` on Discord
 
 Nord supports Library X from 1.2.9 to latest Spotify
 
-![libx-home-page](https://raw.githubusercontent.com/Tetrax-10/Nord-Spotify/master/assets/nord/libx/libx-home-page.png)
+![libx-home-page](https://raw.githubusercontent.com/syoong81/Nord-Spotify/main/assets/nord/libx/libx-home-page.png)
 
 ### Auto Expand Library X
 
-![libx-expanded](https://raw.githubusercontent.com/Tetrax-10/Nord-Spotify/master/assets/nord/libx/libx-expanded.png)
+![libx-expanded](https://raw.githubusercontent.com/syoong81/Nord-Spotify/main/assets/nord/libx/libx-expanded.png)
 
 ### Immersive View on Library X
 
-![immersive-view](https://raw.githubusercontent.com/Tetrax-10/Nord-Spotify/master/assets/nord/libx/immersive-view.png)
+![immersive-view](https://raw.githubusercontent.com/syoong81/Nord-Spotify/main/assets/nord/libx/immersive-view.png)
 
-![immersive-view-2](https://raw.githubusercontent.com/Tetrax-10/Nord-Spotify/master/assets/nord/libx/immersive-view-2.png)
-
-<br />
-
-## Stock UI
-
-Nord supports Stock UI from 1.1.93 to latest Spotify
-
-![old ui home](https://raw.githubusercontent.com/Tetrax-10/Nord-Spotify/master/assets/nord/stock/stock-ui-home-page.png)
-
-![old ui](https://raw.githubusercontent.com/Tetrax-10/Nord-Spotify/master/assets/nord/stock/stock-ui-banner-page.png)
+![immersive-view-2](https://raw.githubusercontent.com/syoong81/Nord-Spotify/main/assets/nord/libx/immersive-view-2.png)
 
 <br />
 
 # Nord's Own Dynamic Theme Engine
 
-![dynamic-home-page](https://raw.githubusercontent.com/Tetrax-10/Nord-Spotify/master/assets/dynamic/dynamic-home-page.png)
+![dynamic-home-page](https://raw.githubusercontent.com/syoong81/Nord-Spotify/main/assets/dynamic/dynamic-home-page.png)
 
-![dynamic-song-page](https://raw.githubusercontent.com/Tetrax-10/Nord-Spotify/master/assets/dynamic/dynamic-song-banner.png)
+![dynamic-song-page](https://raw.githubusercontent.com/syoong81/Nord-Spotify/main/assets/dynamic/dynamic-song-banner.png)
 
-![dynamic-lyrics-page](https://raw.githubusercontent.com/Tetrax-10/Nord-Spotify/master/assets/dynamic/dynamic-lyrics-page.png)
+![dynamic-lyrics-page](https://raw.githubusercontent.com/syoong81/Nord-Spotify/main/assets/dynamic/dynamic-lyrics-page.png)
 
-![dynamic-search-page](https://raw.githubusercontent.com/Tetrax-10/Nord-Spotify/master/assets/dynamic/dynamic-search-page.png)
+![dynamic-search-page](https://raw.githubusercontent.com/syoong81/Nord-Spotify/main/assets/dynamic/dynamic-search-page.png)
 
-![dynamic-search-item](https://raw.githubusercontent.com/Tetrax-10/Nord-Spotify/master/assets/dynamic/dynamic-search-item.png)
+![dynamic-search-item](https://raw.githubusercontent.com/syoong81/Nord-Spotify/main/assets/dynamic/dynamic-search-item.png)
 
 <br />
 
@@ -68,7 +54,7 @@ https://user-images.githubusercontent.com/75513645/206892576-9eb63934-f0e1-4411-
 
 # Useful Snippets
 
-![snippets](https://raw.githubusercontent.com/Tetrax-10/Nord-Spotify/master/assets/snippets.png)
+![snippets](https://raw.githubusercontent.com/syoong81/Nord-Spotify/main/assets/snippets.png)
 
 <br />
 
@@ -101,7 +87,7 @@ https://user-images.githubusercontent.com/75513645/201753268-2a1df86f-8815-452c-
 
 # Custom Fonts
 
-![Custom Fonts Preview](https://raw.githubusercontent.com/Tetrax-10/Nord-Spotify/master/assets/font/custom-fonts.png)
+![Custom Fonts Preview](https://raw.githubusercontent.com/syoong81/Nord-Spotify/main/assets/font/custom-fonts.png)
 
 <br />
 
@@ -119,19 +105,19 @@ You can use custom fonts in Nord remotely. [Google Fonts](https://fonts.google.c
 
 Step 1 : Choose a font and click the plus button at styles section at the end
 
-![plus button](https://raw.githubusercontent.com/Tetrax-10/Nord-Spotify/master/assets/font/font-plus-button.png)
+![plus button](https://raw.githubusercontent.com/syoong81/Nord-Spotify/main/assets/font/font-plus-button.png)
 
 Step 2 : Go to `selected families` and select `@import` Check Box
 
-![selected family](https://raw.githubusercontent.com/Tetrax-10/Nord-Spotify/master/assets/font/font-selected-family.png)
+![selected family](https://raw.githubusercontent.com/syoong81/Nord-Spotify/main/assets/font/font-selected-family.png)
 
 Step 3 : Then Copy that URL and paste that in `Font URL` box in Nord
 
-![font url](https://raw.githubusercontent.com/Tetrax-10/Nord-Spotify/master/assets/font/font-url.png)
+![font url](https://raw.githubusercontent.com/syoong81/Nord-Spotify/main/assets/font/font-url.png)
 
 Step 4 : Then Copy that Font Name and paste that in `Font Name` box in Nord and click save
 
-![font name](https://raw.githubusercontent.com/Tetrax-10/Nord-Spotify/master/assets/font/font-name.png)
+![font name](https://raw.githubusercontent.com/syoong81/Nord-Spotify/main/assets/font/font-name.png)
 
 <br />
 
@@ -152,13 +138,13 @@ Step 3 : Search `Nord` and click install buttton. Done!
 ### Windows Powershell
 
 ```sh
-iwr -useb https://raw.githubusercontent.com/Tetrax-10/Nord-Spotify/master/install-scripts/install.ps1 | iex
+iwr -useb https://raw.githubusercontent.com/syoong81/Nord-Spotify/main/install-scripts/install.ps1 | iex
 ```
 
 ### Mac/Linux
 
 ```sh
-curl -fsSL https://raw.githubusercontent.com/Tetrax-10/Nord-Spotify/master/install-scripts/install.sh | sh
+curl -fsSL https://raw.githubusercontent.com/syoong81/Nord-Spotify/main/install-scripts/install.sh | sh
 ```
 
 <br />
@@ -168,20 +154,20 @@ curl -fsSL https://raw.githubusercontent.com/Tetrax-10/Nord-Spotify/master/insta
 ### Windows Powershell
 
 ```sh
-iwr -useb https://raw.githubusercontent.com/Tetrax-10/Nord-Spotify/master/install-scripts/uninstall.ps1 | iex
+iwr -useb https://raw.githubusercontent.com/syoong81/Nord-Spotify/main/install-scripts/uninstall.ps1 | iex
 ```
 
 ### Mac/Linux
 
 ```sh
-curl -fsSL https://raw.githubusercontent.com/Tetrax-10/Nord-Spotify/master/install-scripts/uninstall.sh | sh
+curl -fsSL https://raw.githubusercontent.com/syoong81/Nord-Spotify/main/install-scripts/uninstall.sh | sh
 ```
 
 <br />
 
 ## Install Manually
 
-Copy [Nord](https://github.com/Tetrax-10/Nord-Spotify/tree/dist/Nord) Folder to your Themes folder
+Copy [Nord](https://github.com/syoong81/Nord-Spotify/tree/main/Nord) Folder to your Themes folder
 
 Then run the following command to apply the theme:
 
@@ -213,10 +199,10 @@ Dynamic Theming made Possible with [chroma.js](https://github.com/gka/chroma.js)
 
 Want your name here? Just like this Repo 🤩
 
-[![Nord Stargazers](https://reporoster.com/stars/Tetrax-10/Nord-Spotify)](https://github.com/Tetrax-10/Nord-Spotify/stargazers)
+[![Nord Stargazers](https://reporoster.com/stars/syoong81/Nord-Spotify)](https://github.com/syoong81/Nord-Spotify/stargazers)
 
 Like This Theme? Gimme Some ❤️ by Liking this Repository
 
 Made with ❤️ from [Chennai](https://www.google.com/maps/place/Chennai,+Tamil+Nadu).
 
-[![Github Stars badge](https://img.shields.io/github/stars/Tetrax-10/Nord-Spotify?logo=github&style=social)](https://github.com/Tetrax-10/Nord-Spotify)
+[![Github Stars badge](https://img.shields.io/github/stars/syoong81/Nord-Spotify?logo=github&style=social)](https://github.com/syoong81/Nord-Spotify)

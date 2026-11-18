@@ -4,7 +4,6 @@ import Shared from "../../../../shared/shared"
 import LocalStorage from "../../../../localStorage/localStorage"
 import addColorSchemePopup from "./SettingsMenuEvents/PopupModals/AddColorScheme"
 import editColorSchemePopup from "./SettingsMenuEvents/PopupModals/EditColorScheme"
-import UiMode from "../../../../features/uiMode/uiMode"
 
 export default function getSettingsMenuDropdownProps() {
     return {
@@ -37,15 +36,8 @@ export default function getSettingsMenuDropdownProps() {
                 LIGHT_VIBRANT: "Light Vibrant",
             },
             onChangeHandler: async () => {
-                if (Shared.SpicetifyConfig.color_scheme === "Dynamic") await DynamicColors.inject()
+                if (Shared.SpicetifyConfig.color_scheme === "Dynamic") await DynamicColors.inject(true)
             },
-        },
-        uiMode: {
-            name: "Nord UI mode",
-            field: "uiMode",
-            options: Shared.uiModeOptions,
-            visibility: Spicetify.RemoteConfigResolver ? true : false,
-            onChangeHandler: UiMode.event.change,
         },
     }
 }

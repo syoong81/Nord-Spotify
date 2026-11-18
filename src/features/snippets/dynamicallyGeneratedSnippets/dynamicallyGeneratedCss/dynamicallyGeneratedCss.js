@@ -1,6 +1,6 @@
 import LocalStorage from "../../../../localStorage/localStorage"
 import Utils from "../../../../utils/utils"
-import { customFont, fontSize } from "./snippets"
+import { bannerBehindTrackList, customFont, fontSize } from "./snippets"
 
 // snippet injection is automated in -> src/features/snippets/snippets.js
 // css is generated dynamically
@@ -9,6 +9,7 @@ const dynamicallyGeneratedCss = (() => {
     const snippets = {
         customFont: customFont,
         fontSizeBool: fontSize,
+        bannerBehindTrackList: bannerBehindTrackList,
     }
 
     function toggleDynamicGeneratedCssSnippets(id) {

@@ -1,4 +1,4 @@
-import React from "react"
+import React from "../../../../../../shims/react"
 
 import Shared from "../../../../../../shared/shared"
 import LocalStorage from "../../../../../../localStorage/localStorage"

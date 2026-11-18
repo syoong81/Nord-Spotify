@@ -25,13 +25,13 @@
 }
 
 // change playing icon color in playlist to theme color
-.main-trackList-playingIcon {
+.main-trackList-rowMarker img {
     filter: sepia() saturate(90%) hue-rotate(170deg);
 }
 
 // change background color of selected row
-.main-trackList-trackListRow.main-trackList-selected,
-.main-trackList-trackListRow.main-trackList-selected:hover {
+[role="row"][aria-selected="true"] > .main-trackList-trackListRow,
+[role="row"][aria-selected="true"] > .main-trackList-trackListRow:hover {
     background-color: rgba(var(--spice-rgb-custom-main-secondary), 0.6) !important;
 }
 .main-trackList-trackListRow:focus-within,
@@ -40,27 +40,28 @@
 }
 
 // When song is currently playing
-.main-trackList-active .main-trackList-rowSubTitle,
-.main-trackList-active .main-trackList-rowSubTitle a,
-.main-trackList-active .main-trackList-rowMarker,
-.main-trackList-active .main-trackList-rowSectionVariable,
-.main-trackList-active .main-trackList-rowSectionVariable a,
-.main-trackList-active .main-trackList-rowSectionVariable span,
-.main-trackList-active .main-trackList-rowMarker,
-.main-trackList-active .main-trackList-rowDuration {
+// (the playing row lost its own class name; it is the only row whose number cell holds the equaliser image)
+.main-trackList-trackListRow:has(.main-trackList-rowMarker img) .main-trackList-rowMainContentSubTitle,
+.main-trackList-trackListRow:has(.main-trackList-rowMarker img) .main-trackList-rowMainContentSubTitle a,
+.main-trackList-trackListRow:has(.main-trackList-rowMarker img) .main-trackList-rowMarker,
+.main-trackList-trackListRow:has(.main-trackList-rowMarker img) .main-trackList-rowSectionVariable,
+.main-trackList-trackListRow:has(.main-trackList-rowMarker img) .main-trackList-rowSectionVariable a,
+.main-trackList-trackListRow:has(.main-trackList-rowMarker img) .main-trackList-rowSectionVariable span,
+.main-trackList-trackListRow:has(.main-trackList-rowMarker img) .main-trackList-rowMarker,
+.main-trackList-trackListRow:has(.main-trackList-rowMarker img) .main-trackList-duration {
     color: var(--spice-custom-subdued) !important;
 }
 
 // artist name color change in all playlist
-.main-trackList-rowSubTitle a[href],
-.main-trackList-rowSubTitle,
+.main-trackList-rowMainContentSubTitle a[href],
+.main-trackList-rowMainContentSubTitle,
 .main-trackList-rowSectionVariable a[href],
 .main-trackList-rowSectionVariable .ebHsEf {
     color: var(--spice-custom-subdued) !important;
 }
 
 // playlist tracks artist hover
-.main-trackList-rowSubTitle.standalone-ellipsis-one-line :hover {
+.main-trackList-rowMainContentSubTitle.standalone-ellipsis-one-line :hover {
     color: var(--spice-custom-link-hover) !important;
 }
 
@@ -97,13 +98,13 @@
 
 // playlist tracks row rounded
 div.main-rootlist-wrapper > div:nth-child(2) > div :hover,
-div.main-rootlist-wrapper > div:nth-child(2) > div .main-trackList-active:hover,
-.main-trackList-trackListRow.main-trackList-trackListRowGrid.main-trackList-selected {
+div.main-rootlist-wrapper > div:nth-child(2) > div .main-trackList-trackListRow:has(.main-trackList-rowMarker img):hover,
+[role="row"][aria-selected="true"] > .main-trackList-trackListRow {
     border-radius: 10px;
 }
 
 // current playing song color
-div.main-rootlist-wrapper > div:nth-child(2) > div .main-trackList-rowTitle.standalone-ellipsis-one-line {
+div.main-rootlist-wrapper > div:nth-child(2) > div .main-trackList-rowMainContentTitle.standalone-ellipsis-one-line {
     color: var(--spice-text);
 }
 
@@ -211,6 +212,7 @@ div.main-rootlist-wrapper > div:nth-child(2) > div .main-trackList-rowTitle.stan
 }
 
 // playlist page big name padding
+.main-entityHeader-title h1,
 .main-entityHeader-titleInner h1 {
     margin: 0 !important;
 }
@@ -226,7 +228,7 @@ div.main-rootlist-wrapper > div:nth-child(2) > div .main-trackList-rowTitle.stan
 }
 
 // search bar in playlist page (at end recommended songs)
-.playlist-inlineSearchBox-filterInputContainer > input {
+.x-filterBox-filterInputContainer > input {
     display: flex;
     background-color: rgba(var(--spice-rgb-custom-main-soft-secondary), 0.7) !important;
     flex-direction: column;
@@ -235,10 +237,11 @@ div.main-rootlist-wrapper > div:nth-child(2) > div .main-trackList-rowTitle.stan
     color: var(--spice-text) !important;
     height: 40px !important;
 }
-.playlist-inlineSearchBox-filterInputContainer > input::placeholder {
+.x-filterBox-filterInputContainer > input::placeholder {
     color: var(--spice-custom-subdued) !important;
 }
 // search bar - search icon in left
+.x-filterBox-searchIconContainer,
 .playlist-inlineSearchBox-searchIcon {
     color: var(--spice-custom-subdued) !important;
 }
@@ -274,10 +277,12 @@ div.main-rootlist-wrapper > div:nth-child(2) > div .main-trackList-rowTitle.stan
 }
 
 // collaborated playlist author names
+.main-entityHeader-creatorWrapper a,
 .main-entityHeader-creatorButton {
     font-weight: bold;
     color: var(--spice-text);
 }
+.main-entityHeader-creatorWrapper a:hover,
 .main-entityHeader-creatorButton:hover {
     color: var(--spice-custom-link-hover) !important;
 }
@@ -301,7 +306,7 @@ div.main-rootlist-wrapper > div:nth-child(2) > div .main-trackList-rowTitle.stan
 }
 
 // current playing song background
-div.main-rootlist-wrapper > div:nth-child(2) > div .main-trackList-active {
+div.main-rootlist-wrapper > div:nth-child(2) > div .main-trackList-trackListRow:has(.main-trackList-rowMarker img) {
     border-radius: 10px;
     background-color: rgba(var(--spice-rgb-custom-main-soft-secondary), 0.6);
 }
@@ -323,5 +328,13 @@ body:not(:has(#main-banner[style*="display: none;"])) {
     .main-entityHeader-headerText {
         position: absolute;
         bottom: 25px;
+        // absolute positioning shrinks the box to fit, which wrapped short titles mid-word ("Po / p")
+        width: max-content;
+        max-width: calc(100% - 2 * var(--content-spacing, 24px));
+
+        // titles break between words only; Spotify's break-word split short titles mid-word
+        h1 {
+            word-break: normal;
+        }
     }
 }
