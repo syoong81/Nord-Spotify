@@ -24,20 +24,21 @@ State as of 2026-11-15, tested on Spotify 1.3.9.2055 with Spicetify 2.46.7 (Wind
 
 1. **Add-on integrations** (`theme/src/third-parties/`): Lyrics Plus, Beautiful Lyrics, Marketplace cards,
    New Releases, Sort by Play Count, Playlist Filter, Sleep Timer. None were installed, so none were checked.
-2. **What's New page** (`/content-feed`): the feed was empty on the test account, so its rows could not be
-   inspected or restyled. The Listening activity (friends) panel is done.
-3. **Remaining dead selectors.** Latest audit (`node dev/tools/audit.mjs` then `node dev/tools/analyze.cjs`,
+2. **Remaining dead selectors.** Latest audit (`node dev/tools/audit.mjs` then `node dev/tools/analyze.cjs`,
    both local and git-ignored): 178 of 652 selectors match. Visual sweep of home, playlist, album, artist, discography,
    search, genre, podcast, lyrics, Quick Search, context menu and the friends panel found nothing else broken. Most of
    the remaining dead selectors are for UI Spotify removed (old sidebar rootlist, cover-art expand buttons, settings
    page equaliser), for add-ons that aren't installed (Marketplace, Lyrics Plus, etc.), or for snippet/popup states
    the audit can't open (Keyboard Shortcuts modal, confirm dialogs). They are harmless but could be deleted once the
    add-on integrations are checked.
-4. **Untested:** macOS and Linux, Premium accounts. `Change Page's Banner On Song Change` was only checked
+3. **Untested:** macOS and Linux, Premium accounts. `Change Page's Banner On Song Change` was only checked
    with a simulated song change, not real playback.
 
 ## Done since the first pass
 
+- What's New (`/content-feed`) checked with a populated feed: chips, release rows, buttons and text follow the
+  scheme. The grey gradient behind each cover is Spotify's own (`--spice-button-disabled` to `--spice-main`),
+  so it follows the scheme too; left as is.
 - CI: one `Build` workflow on `main` (Node 26 LTS) lints, runs `npm run build-repo` and fails if the committed `Nord/`
   differs from the build. The old `dist` deploy and auto-format commits are gone. Still run `npm run build-repo`
   before committing.
