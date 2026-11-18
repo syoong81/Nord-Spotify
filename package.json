@@ -7,10 +7,10 @@
     "main": "./src/app.tsx",
     "repository": {
         "type": "git",
-        "url": "https://github.com/Tetrax-10/Nord-Spotify.git"
+        "url": "https://github.com/syoong81/Nord-Spotify.git"
     },
     "bugs": {
-        "url": "https://github.com/Tetrax-10/Nord-Spotify/issues"
+        "url": "https://github.com/syoong81/Nord-Spotify/issues"
     },
     "scripts": {
         "format": "prettier --write .",

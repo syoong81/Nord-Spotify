@@ -7,7 +7,7 @@ export default function getSettingsMenuButtonProps() {
         likeNord: {
             name: "Like on GitHub 👍",
             color: "green",
-            onClickHandler: () => window.open("https://github.com/Tetrax-10/Nord-Spotify"),
+            onClickHandler: () => window.open("https://github.com/syoong81/Nord-Spotify"),
         },
         reset: {
             name: "Reset Settings",

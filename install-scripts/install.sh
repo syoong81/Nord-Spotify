@@ -33,16 +33,16 @@ then
     echo "Installing Nord (Auto Update mode)"
 
     echo "Fetching Theme from GitHub\n"
-    curl --silent --output "${themePath}/Nord/color.ini" "https://raw.githubusercontent.com/Tetrax-10/Nord-Spotify/master/theme/color.ini"
-    curl --silent --output "${themePath}/Nord/user.css" "https://raw.githubusercontent.com/Tetrax-10/Nord-Spotify/master/Nord/user.css"
-    curl --silent --output "${themePath}/Nord/theme.js" "https://raw.githubusercontent.com/Tetrax-10/Nord-Spotify/master/Nord/theme.js"
+    curl --silent --output "${themePath}/Nord/color.ini" "https://raw.githubusercontent.com/syoong81/Nord-Spotify/main/theme/color.ini"
+    curl --silent --output "${themePath}/Nord/user.css" "https://raw.githubusercontent.com/syoong81/Nord-Spotify/main/Nord/user.css"
+    curl --silent --output "${themePath}/Nord/theme.js" "https://raw.githubusercontent.com/syoong81/Nord-Spotify/main/Nord/theme.js"
 else
     echo "Installing Nord (Offline mode)"
 
     echo "Fetching Theme from GitHub\n"
-    curl --silent --output "${themePath}/Nord/color.ini" "https://raw.githubusercontent.com/Tetrax-10/Nord-Spotify/dist/Nord/color.ini"
-    curl --silent --output "${themePath}/Nord/user.css" "https://raw.githubusercontent.com/Tetrax-10/Nord-Spotify/dist/Nord/user.css"
-    curl --silent --output "${themePath}/Nord/theme.js" "https://raw.githubusercontent.com/Tetrax-10/Nord-Spotify/dist/Nord/theme.js"
+    curl --silent --output "${themePath}/Nord/color.ini" "https://raw.githubusercontent.com/syoong81/Nord-Spotify/main/theme/color.ini"
+    curl --silent --output "${themePath}/Nord/user.css" "https://raw.githubusercontent.com/syoong81/Nord-Spotify/main/Nord/user.css"
+    curl --silent --output "${themePath}/Nord/theme.js" "https://raw.githubusercontent.com/syoong81/Nord-Spotify/main/Nord/theme.js"
 fi
 
 echo "Changing Config"

@@ -22,26 +22,27 @@ State as of 2026-11-15, tested on Spotify 1.3.9.2055 with Spicetify 2.46.7 (Wind
 
 ## Still to do
 
-1. **Fork-dependent files.** `manifest.json`, `install-scripts/*`, the README and the "Like on GitHub" /
-   "How to Reposition Banners" / Discord links still point at Tetrax-10. Update once the fork exists.
-   The README also still advertises Stock UI support.
-2. **Add-on integrations** (`theme/src/third-parties/`): Lyrics Plus, Beautiful Lyrics, Marketplace cards,
+1. **Add-on integrations** (`theme/src/third-parties/`): Lyrics Plus, Beautiful Lyrics, Marketplace cards,
    New Releases, Sort by Play Count, Playlist Filter, Sleep Timer. None were installed, so none were checked.
-3. **What's New page** (`/content-feed`): the feed was empty on the test account, so its rows could not be
+2. **What's New page** (`/content-feed`): the feed was empty on the test account, so its rows could not be
    inspected or restyled. The Listening activity (friends) panel is done.
-4. **Remaining dead selectors.** Latest audit (`node dev/tools/audit.mjs` then `node dev/tools/analyze.cjs`,
+3. **Remaining dead selectors.** Latest audit (`node dev/tools/audit.mjs` then `node dev/tools/analyze.cjs`,
    both local and git-ignored): 178 of 652 selectors match. Visual sweep of home, playlist, album, artist, discography,
    search, genre, podcast, lyrics, Quick Search, context menu and the friends panel found nothing else broken. Most of
    the remaining dead selectors are for UI Spotify removed (old sidebar rootlist, cover-art expand buttons, settings
    page equaliser), for add-ons that aren't installed (Marketplace, Lyrics Plus, etc.), or for snippet/popup states
    the audit can't open (Keyboard Shortcuts modal, confirm dialogs). They are harmless but could be deleted once the
    add-on integrations are checked.
-5. **Untested:** macOS and Linux, Premium accounts. `Change Page's Banner On Song Change` was only checked
+4. **Untested:** macOS and Linux, Premium accounts. `Change Page's Banner On Song Change` was only checked
    with a simulated song change, not real playback.
-6. **Build tooling:** CI still uses Node 16 and spicetify-creator 1.0.13; `npm run build-repo` must be run
+5. **Build tooling:** CI still uses Node 16 and spicetify-creator 1.0.13; `npm run build-repo` must be run
    before committing so `Nord/` holds the current build.
 
 ## Done since the first pass
+
+- Fork links: manifest, install scripts, README, issue template and the settings menu links (Like on GitHub,
+  How to Reposition Banners, custom font tutorial) point at syoong81/Nord-Spotify `main`. Discord and Stock UI
+  sections removed from the README. Verified in the live client.
 
 - Progress bar sized and coloured through Spotify's own variables (`--progress-bar-height` etc.).
 - Player bar: bare play button, no dots under active buttons, shuffle coloured when on. The like button keeps

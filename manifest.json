@@ -6,7 +6,7 @@
         "readme": "README.md",
         "usercss": "Nord/user.css",
         "schemes": "theme/color.ini",
-        "include": ["https://raw.githubusercontent.com/Tetrax-10/Nord-Spotify/master/Nord/theme.js"],
+        "include": ["https://raw.githubusercontent.com/syoong81/Nord-Spotify/main/Nord/theme.js"],
         "tags": ["Nord", "dynamic-color", "flat"]
     }
 ]

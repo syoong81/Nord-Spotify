@@ -43,9 +43,9 @@ if ($PSVersionTable.PSVersion.Major -gt $PSMinVersion) {
         
         # Clone to themes folder
         Write-Host "Fetching Theme from GitHub" -ForegroundColor DarkCyan
-        Invoke-WebRequest -Uri "https://raw.githubusercontent.com/Tetrax-10/Nord-Spotify/master/theme/color.ini" -UseBasicParsing -OutFile "$themePath\Nord\color.ini"
-        Invoke-WebRequest -Uri "https://raw.githubusercontent.com/Tetrax-10/Nord-Spotify/master/Nord/user.css" -UseBasicParsing -OutFile "$themePath\Nord\user.css"
-        Invoke-WebRequest -Uri "https://raw.githubusercontent.com/Tetrax-10/Nord-Spotify/master/Nord/theme.js" -UseBasicParsing -OutFile "$themePath\Nord\theme.js"
+        Invoke-WebRequest -Uri "https://raw.githubusercontent.com/syoong81/Nord-Spotify/main/theme/color.ini" -UseBasicParsing -OutFile "$themePath\Nord\color.ini"
+        Invoke-WebRequest -Uri "https://raw.githubusercontent.com/syoong81/Nord-Spotify/main/Nord/user.css" -UseBasicParsing -OutFile "$themePath\Nord\user.css"
+        Invoke-WebRequest -Uri "https://raw.githubusercontent.com/syoong81/Nord-Spotify/main/Nord/theme.js" -UseBasicParsing -OutFile "$themePath\Nord\theme.js"
     } else {
         # Offline mode
         # create folders
@@ -54,9 +54,9 @@ if ($PSVersionTable.PSVersion.Major -gt $PSMinVersion) {
         
         # Clone to themes folder
         Write-Host "Fetching Theme from GitHub" -ForegroundColor DarkCyan
-        Invoke-WebRequest -Uri "https://raw.githubusercontent.com/Tetrax-10/Nord-Spotify/dist/Nord/color.ini" -UseBasicParsing -OutFile "$themePath\Nord\color.ini"
-        Invoke-WebRequest -Uri "https://raw.githubusercontent.com/Tetrax-10/Nord-Spotify/dist/Nord/user.css" -UseBasicParsing -OutFile "$themePath\Nord\user.css"
-        Invoke-WebRequest -Uri "https://raw.githubusercontent.com/Tetrax-10/Nord-Spotify/dist/Nord/theme.js" -UseBasicParsing -OutFile "$themePath\Nord\theme.js"
+        Invoke-WebRequest -Uri "https://raw.githubusercontent.com/syoong81/Nord-Spotify/main/theme/color.ini" -UseBasicParsing -OutFile "$themePath\Nord\color.ini"
+        Invoke-WebRequest -Uri "https://raw.githubusercontent.com/syoong81/Nord-Spotify/main/Nord/user.css" -UseBasicParsing -OutFile "$themePath\Nord\user.css"
+        Invoke-WebRequest -Uri "https://raw.githubusercontent.com/syoong81/Nord-Spotify/main/Nord/theme.js" -UseBasicParsing -OutFile "$themePath\Nord\theme.js"
     }
 
     # Installing
