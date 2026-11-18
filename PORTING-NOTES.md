@@ -22,8 +22,10 @@ State as of 2026-11-15, tested on Spotify 1.3.9.2055 with Spicetify 2.46.7 (Wind
 
 ## Still to do
 
-1. **Add-on integrations** (`theme/src/third-parties/`): Lyrics Plus, Beautiful Lyrics, Marketplace cards,
-   New Releases, Sort by Play Count, Playlist Filter, Sleep Timer. None were installed, so none were checked.
+1. **Unmaintained add-on styles** (`theme/src/third-parties/extensions/`): Sort by Play Count and Spotify Genres
+   (Tetrax-10/Spicetify-Extensions, archived May 2025), Sleep Timer (p0rtL6, archived 2021), Playlist Filter and
+   Queue Time (original repos gone). Not tested; candidates for removal along with their dead selectors.
+   Beautiful Lyrics (surfbryce, last update Nov 2025) not tested yet.
 2. **Remaining dead selectors.** Latest audit (`node dev/tools/audit.mjs` then `node dev/tools/analyze.cjs`,
    both local and git-ignored): 178 of 652 selectors match. Visual sweep of home, playlist, album, artist, discography,
    search, genre, podcast, lyrics, Quick Search, context menu and the friends panel found nothing else broken. Most of
@@ -35,6 +37,9 @@ State as of 2026-11-15, tested on Spotify 1.3.9.2055 with Spicetify 2.46.7 (Wind
 
 ## Done since the first pass
 
+- Add-ons (2026-11-18): Lyrics Plus, New Releases (both bundled with Spicetify) and Marketplace tested in the live
+  client; all pick up Nord's styling with nothing broken. Settings menu font tutorial link points at the README's
+  Custom Fonts section.
 - `Change Page's Banner On Song Change` tested with real track skips (volume at 0): on, a playlist page's banner
   switches to the new song's album art; off, it stays. Home shows the song art, and returning to the playlist
   restores its own image.
